@@ -9,40 +9,68 @@
 <body>
 
 <header>
-    <h1>Urja Yoga</h1>
-    <p>Balance your energy. Ground your body. Calm your mind.</p>
+  <h2>Urja Yoga</h2>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#classes">Classes</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
 
-<section class="about">
-    <h2>About</h2>
-    <p>
-        Urja Yoga is a balanced approach to wellbeing, combining traditional Hatha and Ashtanga yoga 
-        with nervous system regulation practices. These sessions are designed to help you build 
-        physical strength, emotional stability, and inner calm.
-    </p>
+<section class="hero">
+  <h1>Find Calm in Your Body and Mind</h1>
+  <p>Gentle yoga for nervous system balance</p>
+  <button class="button" onclick="scrollToClasses()">Book a Class</button>
 </section>
 
-<section class="offerings">
-    <h2>Offerings</h2>
-    <ul>
-        <li>🧘‍♀️ Hatha Yoga (Beginners & Intermediate)</li>
-        <li>🌿 Nervous System Regulation Sessions</li>
-        <li>🔥 Ashtanga-Inspired Practice</li>
-        <li>💻 Online Classes</li>
-    </ul>
+<section id="about" class="section">
+  <h2>About Me</h2>
+  <p>
+    Hi, I’m [Your Name]. I teach Hatha and Ashtanga yoga with a focus on calming the nervous system.
+    My approach is gentle, structured, and helps you feel grounded and balanced.
+  </p>
 </section>
 
-<section class="contact">
-    <h2>Connect</h2>
-    <p>Follow on Instagram:</p>
-    <a href="https://instagram.com/urja.ramanandi" target="_blank">
-        @urja.ramanandi
-    </a>
+<section id="classes" class="section">
+  <h2>Classes</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Morning Calm Flow</h3>
+      <p>45 min · Beginner</p>
+      <p>€10</p>
+      <button class="button">Book & Pay</button>
+    </div>
+
+    <div class="card">
+      <h3>Evening Relax & Restore</h3>
+      <p>60 min</p>
+      <p>€12</p>
+      <button class="button">Book & Pay</button>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <h2>Contact</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Message"></textarea>
+    <button class="button">Send</button>
+  </form>
 </section>
 
 <footer>
-    <p>© 2026 Urja Yoga</p>
+  <p>© 2026 Calm Yoga</p>
 </footer>
 
+<script>
+function scrollToClasses() {
+  document.getElementById("classes").scrollIntoView({behavior: "smooth"});
+}
+</script>
+
 </body>
+</html>
 </html>
