@@ -41,7 +41,7 @@ export default function AboutPage() {
 
           <div className="bg-[#5C4A32] rounded-xl p-8 my-10">
             <p className="font-serif text-[1.4rem] font-light italic text-[#F7F2EA] leading-relaxed">
-              &ldquo;At the heart of every session is one question: what does this person&apos;s body and nervous system need today?&rdquo;
+              &ldquo;At the heart of every session is one question: what does this person&apos;s body and mind need today?&rdquo;
             </p>
           </div>
 
