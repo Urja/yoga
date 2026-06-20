@@ -44,4 +44,14 @@ export const RECURRING_SLOTS: RecurringSlot[] = [
   { dayOfWeek: 1, time: '10:30', templateId: 'yin' },
   { dayOfWeek: 3, time: '10:30', templateId: 'yin' },
   { dayOfWeek: 6, time: '14:00', templateId: 'yin' },
+
+  // Evening Hatha in studio — Mon, Wed, Fri 19:00–19:45
+  { dayOfWeek: 0, time: '19:00', templateId: 'h-studio' },
+  { dayOfWeek: 2, time: '19:00', templateId: 'h-studio' },
+  { dayOfWeek: 4, time: '19:00', templateId: 'h-studio' },
+
+  // Evening Hatha online — Mon, Wed, Fri 20:00–20:45
+  { dayOfWeek: 0, time: '20:00', templateId: 'h-online' },
+  { dayOfWeek: 2, time: '20:00', templateId: 'h-online' },
+  { dayOfWeek: 4, time: '20:00', templateId: 'h-online' },
 ]
