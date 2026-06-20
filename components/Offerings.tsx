@@ -16,7 +16,7 @@ export default function Offerings() {
         <div className="flex items-end justify-between mb-12 flex-wrap gap-6">
           <div>
             <p className="text-[0.7rem] font-medium tracking-[0.2em] uppercase text-[#526B55] mb-3">Offerings & Pricing</p>
-            <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] font-light text-[#5C4A32]">Practices for every <em>body</em></h2>
+            <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] font-light text-[#5C4A32]">Accessible yoga practices for every <em>body</em></h2>
           </div>
           <a href="https://wa.me/+4917668954497" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#DDD0BB] text-[#5C4A32] text-[0.78rem] font-medium tracking-[0.08em] uppercase hover:border-[#7A9E7E] hover:text-[#526B55] transition-all">
             Book via WhatsApp
