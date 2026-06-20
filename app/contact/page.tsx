@@ -36,7 +36,7 @@ export default function ContactPage() {
             </p>
             <div className="space-y-6">
               {[
-                { icon: '📍', label: 'Location', value: 'Barnimblick 21, 16356 Ahrensfelde', sub: 'Address shared upon booking' },
+                { icon: '📍', label: 'Location', value: 'Barnimblick 21, 16356 Ahrensfelde' },
                 { icon: '📧', label: 'Email', value: 'urja.ramanandi@gmail.com', href: 'mailto:urja.ramanandi@gmail.com' },
                 { icon: '📲', label: 'WhatsApp', value: 'Available for bookings & enquiries', href: 'https://wa.me/+4917668954497' },
                 { icon: '📸', label: 'Instagram', value: '@urja.ramanandi', href: 'https://instagram.com/urja.ramanandi' },
