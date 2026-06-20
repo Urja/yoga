@@ -62,11 +62,11 @@ export default function SoundHealingPage() {
             </div>
           </div>
 
-          <p className="text-center pt-4">
+          {/* <p className="text-center pt-4">
             <Link href="/blog/sound-healing" className="text-[#526B55] hover:underline text-[0.9rem]">
               Read: Sound healing is not mystical. Here is what it actually does. →
             </Link>
-          </p>
+          </p> */}
         </div>
       </section>
     </main>
