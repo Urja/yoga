@@ -19,6 +19,8 @@ const TYPE_COLORS: Record<string, string> = {
   hatha:              'border-t-[#7A9E7E]',
   yin:                'border-t-[#9B8EC4]',
   personal:           'border-t-[#8B7355]',
+  'h-studio':         'border-t-[#7A9E7E]',
+  'h-online':         'border-t-[#5B9BAF]',
   'h-beginner-studio':'border-t-[#E8A87C]',
   'h-beginner-online':'border-t-[#E8A87C]',
 }
@@ -105,7 +107,7 @@ export default function SchedulePage() {
 
         {/* Legend */}
         <div className="flex gap-6 flex-wrap mt-8 pt-6 border-t border-[#EAE0CF]">
-          {[['#7A9E7E','Hatha Yoga'],['#9B8EC4','Deep Relaxation'],['#E8A87C','Beginner Hatha']].map(([color,label]) => (
+          {[['#7A9E7E','Hatha · In Studio'],['#5B9BAF','Hatha · Online'],['#9B8EC4','Deep Relaxation'],['#E8A87C','Beginner Hatha']].map(([color,label]) => (
             <div key={label} className="flex items-center gap-2">
               <div className="w-2.5 h-2.5 rounded-sm" style={{background: color}} />
               <span className="text-[0.72rem] text-[#8B7355]">{label}</span>
