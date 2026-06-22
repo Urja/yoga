@@ -17,17 +17,21 @@ export default function AboutPage() {
       <section className="py-20">
         <div className="max-w-[780px] mx-auto px-8 space-y-6 text-[0.97rem] text-[#8B7355] leading-[1.85]">
 
-          <p>Yoga entered my life through necessity, not ambition.</p>
-
-          <p>
-            After navigating my own health challenges, I discovered that the slower, traditional practices of yoga supported my wellbeing in ways that exercise alone never could. The physical postures helped me rebuild strength. Breathwork brought steadiness during difficult periods. Stillness taught me how to listen to my body again.
-          </p>
-
-          <p>What began as a personal practice gradually became a way of living.</p>
-
-          <p>
-            The practice that changed things for me was quieter and more traditional — rooted in awareness rather than achievement, consistency rather than intensity, and long-term wellbeing rather than short-term results.
-          </p>
+          <div className="grid md:grid-cols-2 gap-10 items-start mb-4">
+            <div className="space-y-6">
+              <p>Yoga entered my life through necessity, not ambition.</p>
+              <p>
+                After navigating my own health challenges, I discovered that the slower, traditional practices of yoga supported my wellbeing in ways that exercise alone never could. The physical postures helped me rebuild strength. Breathwork brought steadiness during difficult periods. Stillness taught me how to listen to my body again.
+              </p>
+              <p>What began as a personal practice gradually became a way of living.</p>
+              <p>
+                The practice that changed things for me was quieter and more traditional — rooted in awareness rather than achievement, consistency rather than intensity, and long-term wellbeing rather than short-term results.
+              </p>
+            </div>
+            <div className="rounded-xl overflow-hidden aspect-[3/4] max-h-[340px] md:max-h-none">
+              <img src="/images/urja-portrait.jpg" alt="Urja" className="w-full h-full object-cover" style={{objectPosition: '50% 20%'}} />
+            </div>
+          </div>
 
           <p>That experience shaped everything I teach today.</p>
 
