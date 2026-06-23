@@ -11,6 +11,7 @@ const links = [
   { href: '/yin', label: 'Yin' },
   { href: '/sound-healing', label: 'Sound' },
   { href: '/online', label: 'Online' },
+  { href: '/events', label: 'Events' },
   // { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ]
