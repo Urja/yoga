@@ -49,7 +49,7 @@ export default function HomePage() {
       <section className="bg-[#5C4A32] py-20 text-center">
         <div className="max-w-[1100px] mx-auto px-8">
           <blockquote className="font-serif text-[clamp(1.5rem,3.5vw,2.5rem)] font-light italic text-[#F7F2EA] max-w-2xl mx-auto leading-relaxed mb-5">
-            "This is not fitness yoga with a different name. It is the practice as it was before it became a format."
+            "Long before yoga became exercise, it was a path of self-discovery. That is the tradition I honour."
           </blockquote>
           <p className="text-[0.7rem] tracking-[0.15em] uppercase text-[#A8C5AB]">— Urja Yoga Philosophy</p>
           <div className="flex justify-center gap-12 mt-10 flex-wrap">
