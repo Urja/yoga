@@ -78,7 +78,7 @@ export default function HathaPage() {
               ['Trial', 'First class only', '€8 online · €10 studio'],
               ['Drop-In', 'Per class', '€15 online · €18 studio'],
               ['Weekly', '1× per week / month', '€48 online · €60 studio /mo'],
-              ['Monthly', 'Unlimited', '€150 online · €200 studio /mo'],
+              ['Unlimited', 'Online only', '€150 /mo'],
             ].map(([label, detail, price]) => (
               <div key={label} className="flex items-center justify-between px-4 py-3 rounded-lg bg-[#FDFAF6] border border-[#EAE0CF] text-[0.85rem]">
                 <span>

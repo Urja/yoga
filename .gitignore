@@ -1,0 +1,9 @@
+node_modules/
+.next/
+out/
+.DS_Store
+*.tsbuildinfo
+.idea/
+YogaManager.app/
+students.html
+public/students.html
