@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Urja Yoga — Student Manager</title>
+<style>
+  :root {
+    --sage:#6b7c5e;--sage-light:#8fa07e;--sage-pale:#f0f4ec;--sand:#e8dcc8;
+    --warm:#c4956a;--warm-dark:#a8784f;--text:#2d3a2e;--muted:#6b7565;
+    --border:#d4ddd0;--red:#c0392b;--red-pale:#fdf3f2;--orange:#d68910;
+    --orange-pale:#fef9e7;--green:#27ae60;--green-pale:#eafaf1;
+    --blue:#2471a3;--blue-pale:#eaf4fb;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--sage-pale);color:var(--text);min-height:100vh;}
+
+  header{background:var(--sage);color:white;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+  header h1{font-size:1.4rem;font-weight:600;}
+  header span{font-size:.85rem;opacity:.8;}
+  .drive-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;cursor:pointer;border:none;transition:all .15s;}
+  .drive-badge.connected{background:rgba(255,255,255,.2);color:white;}
+  .drive-badge.connected:hover{background:rgba(255,255,255,.3);}
+  .drive-badge.disconnected{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.25);}
+  .drive-badge.disconnected:hover{background:rgba(255,255,255,.2);color:white;}
+  .drive-dot{width:8px;height:8px;border-radius:50%;background:#34d058;display:inline-block;}
+  .drive-dot.off{background:rgba(255,255,255,.4);}
+
+  main{max-width:1200px;margin:0 auto;padding:28px 24px;}
+
+  /* TABS */
+  .tab-bar{display:flex;border-bottom:2px solid var(--border);margin-bottom:28px;}
+  .tab-btn{padding:12px 28px;background:none;border:none;font-size:.9rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;}
+  .tab-btn.active{color:var(--sage);border-bottom-color:var(--sage);font-weight:600;}
+  .tab-btn:hover:not(.active){color:var(--text);background:var(--sage-pale);}
+  .tab-view{display:none;}
+  .tab-view.active{display:block;}
+
+  /* STATS */
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:28px;}
+  .stat-card{background:white;border-radius:var(--radius);padding:18px;text-align:center;box-shadow:var(--shadow);border-top:3px solid var(--sage);}
+  .stat-card.warn{border-top-color:var(--orange);}
+  .stat-card.alert{border-top-color:var(--red);}
+  .stat-card.ok{border-top-color:var(--green);}
+  .stat-card.income{border-top-color:var(--blue);}
+  .stat-num{font-size:1.8rem;font-weight:700;color:var(--sage);}
+  .stat-card.warn .stat-num{color:var(--orange);}
+  .stat-card.alert .stat-num{color:var(--red);}
+  .stat-card.ok .stat-num{color:var(--green);}
+  .stat-card.income .stat-num{color:var(--blue);font-size:1.5rem;}
+  .stat-label{font-size:.78rem;color:var(--muted);margin-top:4px;}
+
+  /* TOOLBAR */
+  .toolbar{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;align-items:center;}
+  .toolbar input[type=search]{flex:1;min-width:200px;padding:10px 16px;border:1px solid var(--border);border-radius:var(--radius);font-size:.9rem;outline:none;background:white;}
+  .toolbar input[type=search]:focus{border-color:var(--sage);}
+  .toolbar select{padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);font-size:.9rem;background:white;outline:none;cursor:pointer;}
+
+  /* BUTTONS */
+  .btn{padding:10px 20px;border-radius:var(--radius);border:none;font-size:.9rem;font-weight:500;cursor:pointer;transition:all .15s;}
+  .btn-primary{background:var(--sage);color:white;}
+  .btn-primary:hover{background:var(--sage-light);}
+  .btn-warm{background:var(--warm);color:white;}
+  .btn-warm:hover{background:var(--warm-dark);}
+  .btn-blue{background:var(--blue);color:white;}
+  .btn-blue:hover{opacity:.85;}
+  .btn-ghost{background:transparent;color:var(--sage);border:1px solid var(--border);padding:6px 14px;font-size:.82rem;}
+  .btn-ghost:hover{background:var(--sage-pale);}
+  .btn-danger{background:var(--red);color:white;padding:6px 14px;font-size:.82rem;}
+  .btn-danger:hover{opacity:.85;}
+  .btn-sm{padding:6px 12px;font-size:.8rem;}
+
+  /* STUDENT GRID */
+  .student-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px;}
+  .student-card{background:white;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:transform .15s,box-shadow .15s;}
+  .student-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.12);}
+  .card-top{padding:18px 18px 14px;display:flex;align-items:flex-start;gap:14px;}
+  .avatar{width:46px;height:46px;border-radius:50%;background:var(--sage);color:white;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:600;flex-shrink:0;}
+  .student-name{font-size:1rem;font-weight:600;}
+  .student-meta{font-size:.78rem;color:var(--muted);margin-top:2px;}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+  .tag{font-size:.72rem;padding:2px 8px;border-radius:20px;font-weight:500;}
+  .tag-level{background:var(--sage-pale);color:var(--sage);border:1px solid var(--border);}
+  .tag-course{background:var(--sand);color:var(--warm-dark);}
+  .card-sessions{padding:12px 18px;border-top:1px solid var(--sage-pale);border-bottom:1px solid var(--sage-pale);background:var(--sage-pale);}
+  .session-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+  .session-label{font-size:.78rem;color:var(--muted);}
+  .progress-bar{height:8px;background:var(--border);border-radius:4px;overflow:hidden;}
+  .progress-fill{height:100%;border-radius:4px;background:var(--sage);transition:width .3s;}
+  .progress-fill.low{background:var(--orange);}
+  .progress-fill.empty{background:var(--red);}
+  .remaining-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.75rem;font-weight:600;}
+  .badge-ok{background:var(--green-pale);color:var(--green);}
+  .badge-low{background:var(--orange-pale);color:var(--orange);}
+  .badge-empty{background:var(--red-pale);color:var(--red);}
+  .card-footer{padding:10px 18px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+  .card-footer .spacer{flex:1;}
+  .card-notes{padding:0 18px 12px;font-size:.78rem;color:var(--muted);font-style:italic;line-height:1.5;}
+  .empty-state{text-align:center;padding:60px 20px;color:var(--muted);grid-column:1/-1;}
+  .empty-state h3{font-size:1.1rem;margin-bottom:8px;color:var(--text);}
+
+  /* MODAL */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100;align-items:center;justify-content:center;padding:20px;}
+  .modal-overlay.open{display:flex;}
+  .modal{background:white;border-radius:14px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+  .modal-header{padding:22px 24px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+  .modal-header h2{font-size:1.15rem;}
+  .modal-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--muted);line-height:1;}
+  .modal-body{padding:24px;}
+  .modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;}
+
+  /* FORM */
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .form-group{display:flex;flex-direction:column;gap:6px;}
+  .form-group.full{grid-column:1/-1;}
+  label{font-size:.82rem;font-weight:600;color:var(--text);}
+  input,select,textarea{padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit;outline:none;transition:border-color .15s;}
+  input:focus,select:focus,textarea:focus{border-color:var(--sage);}
+  textarea{resize:vertical;min-height:80px;}
+  .form-hint{font-size:.75rem;color:var(--muted);}
+  .price-hint{font-size:.78rem;color:var(--blue);font-weight:500;margin-top:2px;}
+
+  /* LOG */
+  .log-entry{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--sage-pale);font-size:.85rem;}
+  .log-entry:last-child{border-bottom:none;}
+  .log-date{color:var(--muted);font-size:.78rem;}
+
+  /* EMAIL */
+  .email-preview{background:var(--sage-pale);border:1px solid var(--border);border-radius:8px;padding:16px;font-size:.85rem;white-space:pre-wrap;line-height:1.7;color:var(--text);font-family:inherit;}
+
+  /* TAX */
+  .tax-controls{display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap;}
+  .tax-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;}
+  .tax-sum-card{background:var(--sage-pale);border-radius:8px;padding:16px;text-align:center;}
+  .tax-sum-num{font-size:1.6rem;font-weight:700;color:var(--sage);}
+  .tax-sum-card.blue .tax-sum-num{color:var(--blue);}
+  .tax-sum-label{font-size:.75rem;color:var(--muted);margin-top:2px;}
+  .tax-month-block{margin-bottom:24px;}
+  .tax-month-header{font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;padding:8px 0 6px;border-bottom:2px solid var(--border);display:flex;justify-content:space-between;}
+  table{width:100%;border-collapse:collapse;font-size:.85rem;}
+  th{text-align:left;padding:8px 10px;font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;background:var(--sage-pale);}
+  td{padding:10px;border-bottom:1px solid var(--sage-pale);}
+  tr:last-child td{border-bottom:none;}
+  .td-amount{font-weight:600;color:var(--blue);text-align:right;}
+  .month-total-row td{font-weight:700;background:var(--sage-pale);color:var(--sage);}
+  .month-total-row .td-amount{color:var(--blue);}
+  .no-data{text-align:center;padding:32px;color:var(--muted);font-size:.9rem;}
+
+  /* DRIVE */
+  .setup-steps{counter-reset:step;}
+  .setup-step{display:flex;gap:14px;margin-bottom:20px;}
+  .setup-step::before{counter-increment:step;content:counter(step);min-width:28px;height:28px;background:var(--sage);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0;margin-top:1px;}
+  .setup-step-body strong{font-size:.88rem;display:block;margin-bottom:4px;}
+  .setup-step-body p{font-size:.8rem;color:var(--muted);line-height:1.6;}
+  .setup-step-body code{background:var(--sage-pale);padding:1px 6px;border-radius:4px;font-size:.8rem;}
+  .backup-log{max-height:160px;overflow-y:auto;font-size:.78rem;}
+  .backup-log-entry{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--sage-pale);color:var(--muted);}
+  .backup-log-entry:last-child{border-bottom:none;}
+  .backup-log-entry .ok{color:var(--green);font-weight:600;}
+  .backup-log-entry .err{color:var(--red);font-weight:600;}
+
+  /* FINANCE */
+  .finance-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px;}
+  .finance-card{background:white;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
+  .finance-card-header{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--sage-pale);}
+  .finance-card-header h3{font-size:.95rem;font-weight:600;}
+  .expense-row{display:flex;align-items:center;gap:10px;padding:10px 20px;border-bottom:1px solid var(--sage-pale);font-size:.85rem;}
+  .expense-row:last-child{border-bottom:none;}
+  .expense-cat{font-size:.72rem;padding:2px 8px;border-radius:20px;background:var(--sand);color:var(--warm-dark);font-weight:500;white-space:nowrap;}
+  .expense-desc{flex:1;color:var(--text);}
+  .expense-date{font-size:.75rem;color:var(--muted);white-space:nowrap;}
+  .expense-amt{font-weight:600;color:var(--red);white-space:nowrap;}
+  .expense-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;padding:2px 4px;}
+  .expense-del:hover{color:var(--red);}
+  .no-items{padding:24px;text-align:center;color:var(--muted);font-size:.85rem;}
+  .balance-summary{background:white;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center;margin-bottom:20px;}
+  .bs-num{font-size:1.6rem;font-weight:700;}
+  .bs-label{font-size:.78rem;color:var(--muted);margin-top:2px;}
+  .bs-income{color:var(--green);}
+  .bs-expense{color:var(--red);}
+  .bs-profit.positive{color:var(--blue);}
+  .bs-profit.negative{color:var(--red);}
+  .month-controls{display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap;}
+  .month-controls select{padding:8px 14px;border:1px solid var(--border);border-radius:8px;background:white;font-size:.9rem;outline:none;}
+
+  @media(max-width:768px){.stats{grid-template-columns:repeat(2,1fr);}.finance-grid{grid-template-columns:1fr;}.balance-summary{grid-template-columns:1fr;}.tax-summary{grid-template-columns:1fr 1fr;}}
+  @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr);}.form-grid{grid-template-columns:1fr;}header{flex-direction:column;gap:4px;align-items:flex-start;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>🪷 Urja Yoga — Student Manager</h1>
+    <span id="headerDate"></span>
+  </div>
+  <button class="drive-badge disconnected" id="driveBadge" onclick="openDriveModal()">
+    <span class="drive-dot off" id="driveDot"></span>
+    <span id="driveLabel">Set Backup Folder</span>
+  </button>
+</header>
+
+<main>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('students')">👤 Students</button>
+    <button class="tab-btn" onclick="switchTab('finance')">📊 Finance</button>
+  </div>
+
+  <!-- STUDENTS TAB -->
+  <div class="tab-view active" id="tab-students">
+    <div class="stats">
+      <div class="stat-card ok"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Total Students</div></div>
+      <div class="stat-card"><div class="stat-num" id="statActive">0</div><div class="stat-label">Active Packages</div></div>
+      <div class="stat-card warn"><div class="stat-num" id="statLow">0</div><div class="stat-label">Low Sessions (≤2)</div></div>
+      <div class="stat-card alert"><div class="stat-num" id="statEmpty">0</div><div class="stat-label">Payment Due</div></div>
+      <div class="stat-card income"><div class="stat-num" id="statIncome">€0</div><div class="stat-label">Income This Year</div></div>
+    </div>
+    <div class="toolbar">
+      <input type="search" id="searchInput" placeholder="Search students…" oninput="renderStudents()" />
+      <select id="filterLevel" onchange="renderStudents()">
+        <option value="">All Levels</option>
+        <option>Beginner</option><option>Intermediate</option><option>Advanced</option>
+      </select>
+      <select id="filterStatus" onchange="renderStudents()">
+        <option value="">All Status</option>
+        <option value="ok">Sessions Available</option>
+        <option value="low">Low Sessions</option>
+        <option value="empty">Payment Due</option>
+      </select>
+      <button class="btn btn-primary" onclick="openAddModal()">+ Add Student</button>
+      <button class="btn btn-blue" onclick="openTaxReport()">📊 Tax Report</button>
+      <button class="btn btn-warm" onclick="sendBulkReminders()">📧 Send Reminders</button>
+    </div>
+    <div class="student-grid" id="studentGrid"></div>
+  </div>
+
+  <!-- FINANCE TAB -->
+  <div class="tab-view" id="tab-finance">
+    <div class="month-controls">
+      <select id="finMonth" onchange="renderFinance()"></select>
+      <select id="finYear" onchange="renderFinance()"></select>
+      <div style="flex:1"></div>
+      <button class="btn btn-primary btn-sm" onclick="openExpenseModal()">+ Add Expense</button>
+    </div>
+    <div class="balance-summary">
+      <div><div class="bs-num bs-income" id="bsIncome">€0</div><div class="bs-label">Income</div></div>
+      <div><div class="bs-num bs-expense" id="bsExpense">€0</div><div class="bs-label">Expenses</div></div>
+      <div><div class="bs-num bs-profit" id="bsProfit">€0</div><div class="bs-label">Net Profit</div></div>
+    </div>
+    <div class="finance-grid">
+      <div class="finance-card">
+        <div class="finance-card-header"><h3>💰 Income</h3><span id="finIncomeTotal" style="font-weight:700;color:var(--green)">€0</span></div>
+        <div id="finIncomeList"></div>
+      </div>
+      <div class="finance-card">
+        <div class="finance-card-header"><h3>💸 Expenses</h3><span id="finExpenseTotal" style="font-weight:700;color:var(--red)">€0</span></div>
+        <div id="finExpenseList"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Add/Edit Student -->
+<div class="modal-overlay" id="studentModal">
+  <div class="modal">
+    <div class="modal-header"><h2 id="modalTitle">Add Student</h2><button class="modal-close" onclick="closeModal('studentModal')">×</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>Full Name *</label><input type="text" id="fName" placeholder="e.g. Anna Müller" /></div>
+        <div class="form-group"><label>Email</label><input type="email" id="fEmail" placeholder="anna@example.com" /></div>
+        <div class="form-group"><label>Phone</label><input type="tel" id="fPhone" placeholder="+49 …" /></div>
+        <div class="form-group"><label>Level</label>
+          <select id="fLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select>
+        </div>
+        <div class="form-group full"><label>Course / Class</label>
+          <select id="fCourse" onchange="autoFillPrice()">
+            <option value="Monthly Pass (Online)">Monthly Pass — Online (€150/month)</option>
+            <option value="Monthly Pass (In Studio)">Monthly Pass — In Studio (€200/month)</option>
+            <option value="Hatha Yoga (Online)">Hatha Yoga — Online (€15/session)</option>
+            <option value="Hatha Yoga (In Studio)">Hatha Yoga — In Studio (€18/session)</option>
+            <option value="Beginner Hatha (In Studio)">Beginner Hatha — In Studio (€18/session)</option>
+            <option value="Beginner Hatha (Online)">Beginner Hatha — Online (€15/session)</option>
+            <option value="Deep Relaxation (In Studio)">Deep Relaxation — In Studio (€20/session)</option>
+            <option value="Personal Training">Personal Training (custom price)</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Package (Sessions)</label>
+          <select id="fPackage" onchange="updatePackageHint();autoFillPrice()">
+            <option value="4">4 sessions</option><option value="8">8 sessions</option>
+            <option value="12">12 sessions</option><option value="16">16 sessions</option>
+            <option value="custom">Custom…</option>
+          </select>
+        </div>
+        <div class="form-group" id="customSessionsGroup" style="display:none">
+          <label>Custom Count</label><input type="number" id="fCustomSessions" min="1" oninput="autoFillPrice()" />
+        </div>
+        <div class="form-group"><label>Payment Amount (€)</label>
+          <input type="number" id="fAmount" min="0" step="0.01" placeholder="e.g. 60" />
+          <span class="price-hint" id="priceHint"></span>
+        </div>
+        <div class="form-group"><label>Payment Date</label><input type="date" id="fPaymentDate" /></div>
+        <div class="form-group full"><label>Start Date</label><input type="date" id="fStartDate" /></div>
+        <div class="form-group full"><label>Health Notes / Problems</label>
+          <textarea id="fNotes" placeholder="e.g. lower back pain, high blood pressure…"></textarea>
+          <span class="form-hint">Private — only visible to you.</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('studentModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveStudent()">Save Student</button>
+    </div>
+  </div>
+</div>
+
+<!-- Log Session -->
+<div class="modal-overlay" id="logModal">
+  <div class="modal" style="max-width:440px">
+    <div class="modal-header"><h2 id="logModalTitle">Log Session</h2><button class="modal-close" onclick="closeModal('logModal')">×</button></div>
+    <div class="modal-body">
+      <div class="form-group" style="margin-bottom:16px"><label>Session Date</label><input type="date" id="logDate" /></div>
+      <div class="form-group"><label>Note (optional)</label><input type="text" id="logNote" placeholder="e.g. focused on breathing" /></div>
+      <div id="sessionHistory" style="margin-top:20px"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('logModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="confirmLogSession()">Mark Session Used</button>
+    </div>
+  </div>
+</div>
+
+<!-- Renew -->
+<div class="modal-overlay" id="renewModal">
+  <div class="modal" style="max-width:460px">
+    <div class="modal-header"><h2 id="renewModalTitle">Renew Package</h2><button class="modal-close" onclick="closeModal('renewModal')">×</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Add Sessions</label>
+          <select id="renewPackage" onchange="updateRenewHint()">
+            <option value="4">4 sessions</option><option value="8">8 sessions</option>
+            <option value="12">12 sessions</option><option value="16">16 sessions</option>
+            <option value="custom">Custom…</option>
+          </select>
+        </div>
+        <div class="form-group full" id="renewCustomGroup" style="display:none">
+          <label>Custom Count</label><input type="number" id="renewCustom" min="1" oninput="updateRenewHint()" />
+        </div>
+        <div class="form-group"><label>Payment Amount (€)</label>
+          <input type="number" id="renewAmount" min="0" step="0.01" />
+          <span class="price-hint" id="renewPriceHint"></span>
+        </div>
+        <div class="form-group"><label>Payment Date</label><input type="date" id="renewDate" /></div>
+        <div class="form-group full"><label>Note (optional)</label><input type="text" id="renewNote" placeholder="e.g. cash, PayPal" /></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('renewModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="confirmRenew()">Save Renewal</button>
+    </div>
+  </div>
+</div>
+
+<!-- Email -->
+<div class="modal-overlay" id="emailModal">
+  <div class="modal" style="max-width:560px">
+    <div class="modal-header"><h2>Payment Reminder Email</h2><button class="modal-close" onclick="closeModal('emailModal')">×</button></div>
+    <div class="modal-body">
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:14px">Preview below, then open in your mail app.</p>
+      <div class="email-preview" id="emailPreview"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('emailModal')">Close</button>
+      <button class="btn btn-warm" onclick="sendEmailNow()">📧 Open in Mail App</button>
+    </div>
+  </div>
+</div>
+
+<!-- Tax Report -->
+<div class="modal-overlay" id="taxModal">
+  <div class="modal" style="max-width:860px">
+    <div class="modal-header"><h2>📊 Tax Report — Income Records</h2><button class="modal-close" onclick="closeModal('taxModal')">×</button></div>
+    <div class="modal-body">
+      <div class="tax-controls">
+        <select id="taxYear" onchange="renderTaxReport()"></select>
+        <select id="taxStudent" onchange="renderTaxReport()"><option value="">All Students</option></select>
+        <div style="flex:1"></div>
+        <button class="btn btn-blue btn-sm" onclick="exportCSV()">⬇ Export CSV</button>
+      </div>
+      <div class="tax-summary">
+        <div class="tax-sum-card blue"><div class="tax-sum-num" id="taxTotalIncome">€0</div><div class="tax-sum-label">Total Income</div></div>
+        <div class="tax-sum-card"><div class="tax-sum-num" id="taxTotalSessions">0</div><div class="tax-sum-label">Sessions Sold</div></div>
+        <div class="tax-sum-card"><div class="tax-sum-num" id="taxTotalStudents">0</div><div class="tax-sum-label">Paying Students</div></div>
+      </div>
+      <div id="taxTableArea"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('taxModal')">Close</button>
+      <button class="btn btn-blue" onclick="exportCSV()">⬇ Export CSV</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Expense -->
+<div class="modal-overlay" id="expenseModal">
+  <div class="modal" style="max-width:440px">
+    <div class="modal-header"><h2>Add Expense</h2><button class="modal-close" onclick="closeModal('expenseModal')">×</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>Date *</label><input type="date" id="eDate" /></div>
+        <div class="form-group"><label>Amount (€) *</label><input type="number" id="eAmount" min="0" step="0.01" placeholder="e.g. 50" /></div>
+        <div class="form-group"><label>Category</label>
+          <select id="eCategory">
+            <option>Rent</option><option>Equipment</option><option>Props</option>
+            <option>Software</option><option>Marketing</option><option>Transport</option>
+            <option>Professional Development</option><option>Insurance</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Description</label><input type="text" id="eDesc" placeholder="e.g. Yoga mats" /></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('expenseModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveExpense()">Save Expense</button>
+    </div>
+  </div>
+</div>
+
+<!-- Backup -->
+<div class="modal-overlay" id="driveModal">
+  <div class="modal" style="max-width:540px">
+    <div class="modal-header"><h2>💾 Auto Backup</h2><button class="modal-close" onclick="closeModal('driveModal')">×</button></div>
+    <div class="modal-body">
+      <div id="driveSetupView">
+        <p style="font-size:.88rem;line-height:1.7;margin-bottom:18px">Pick a folder on your Mac once. Every 15 days the app saves a <strong>CSV + JSON</strong> backup there automatically — free, no account needed.</p>
+        <div style="background:var(--blue-pale);border-radius:8px;padding:14px 16px;font-size:.82rem;color:var(--blue);line-height:1.6;margin-bottom:20px">
+          💡 <strong>Tip:</strong> Pick a folder inside <strong>iCloud Drive</strong>, <strong>Dropbox</strong>, or <strong>OneDrive</strong> and your backups will also sync to the cloud for free.
+        </div>
+        <p style="font-size:.78rem;color:var(--muted)">Works in Chrome and Edge.</p>
+      </div>
+      <div id="driveConnectedView" style="display:none">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;background:var(--green-pale);padding:14px 16px;border-radius:8px">
+          <span style="font-size:1.5rem">📁</span>
+          <div><div style="font-weight:600;font-size:.9rem">Backup folder set</div><div style="font-size:.78rem;color:var(--muted);margin-top:2px" id="folderNameLabel"></div></div>
+        </div>
+        <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;cursor:pointer;margin-bottom:12px">
+          <input type="checkbox" id="autoBackupToggle" onchange="saveAutoBackupSetting()" style="width:auto;padding:0" />
+          Auto-save every 15 days when I open the app
+        </label>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:16px" id="lastBackupLabel"></div>
+        <div style="font-size:.82rem;font-weight:600;margin-bottom:8px;color:var(--muted)">HISTORY</div>
+        <div class="backup-log" id="backupLog"></div>
+      </div>
+    </div>
+    <div class="modal-footer" id="driveModalFooter">
+      <button class="btn btn-ghost" onclick="closeModal('driveModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="pickFolder()">📂 Choose Folder</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- PRICES ----
+const PRICE_PER_SESSION = {'Hatha Yoga (Online)':15,'Hatha Yoga (In Studio)':18,'Beginner Hatha (In Studio)':18,'Beginner Hatha (Online)':15,'Deep Relaxation (In Studio)':20,'Personal Training':0};
+const MONTHLY_PASS_PRICE = {'Monthly Pass (Online)':150,'Monthly Pass (In Studio)':200};
+
+// ---- DATA ----
+let students = JSON.parse(localStorage.getItem('yogaStudents')||'[]');
+let expenses = JSON.parse(localStorage.getItem('yogaExpenses')||'[]');
+let editingId = null, currentStudentId = null, currentEmailTo = '', currentEmailBody = '';
+
+function save(){ localStorage.setItem('yogaStudents', JSON.stringify(students)); }
+function saveExpenses(){ localStorage.setItem('yogaExpenses', JSON.stringify(expenses)); }
+function genId(){ return Date.now().toString(36)+Math.random().toString(36).slice(2); }
+function initials(name){ return name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase(); }
+function fmtDate(d){ if(!d) return ''; const [y,m,day]=d.split('-'); return `${parseInt(day)} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(m)-1]} ${y}`; }
+function avatarColor(name){ const c=['#6b7c5e','#8fa07e','#c4956a','#7b9e87','#a0856e','#5d7a6b']; let h=0; for(const x of name) h=(h*31+x.charCodeAt(0))&0xffff; return c[h%c.length]; }
+
+// ---- MONTHLY PASS ----
+function isMonthlyPass(course){ return course&&course.startsWith('Monthly Pass'); }
+function getLastPaymentMonth(s){
+  const all=[...(s.payments||[]),...(s.renewals||[])];
+  if(!all.length) return null;
+  return all.sort((a,b)=>a.date<b.date?1:-1)[0].date.slice(0,7);
+}
+
+// ---- STATUS ----
+function getStatus(s){
+  if(isMonthlyPass(s.course)){
+    const last=getLastPaymentMonth(s);
+    const now=new Date().toISOString().slice(0,7);
+    return (!last||last<now)?'empty':'ok';
+  }
+  const rem=s.totalSessions-s.usedSessions;
+  if(rem<=0) return 'empty';
+  if(rem<=2) return 'low';
+  return 'ok';
+}
+
+// ---- ALL PAYMENTS ----
+function getAllPayments(){
+  const list=[];
+  for(const s of students){
+    for(const p of (s.payments||[])) list.push({studentId:s.id,studentName:s.name,course:s.course,...p});
+    for(const r of (s.renewals||[])) list.push({studentId:s.id,studentName:s.name,course:s.course,date:r.date,sessions:r.added,amount:r.amount||0,note:r.note||'Renewal',type:'renewal'});
+  }
+  return list.sort((a,b)=>a.date<b.date?-1:1);
+}
+
+// ---- TABS ----
+function switchTab(name){
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['students','finance'][i]===name));
+  document.querySelectorAll('.tab-view').forEach(v=>v.classList.toggle('active',v.id==='tab-'+name));
+  if(name==='finance') renderFinance();
+}
+
+// ---- RENDER STUDENTS ----
+function renderStudents(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const lf=document.getElementById('filterLevel').value;
+  const sf=document.getElementById('filterStatus').value;
+  let list=students.filter(s=>{
+    if(q&&!s.name.toLowerCase().includes(q)&&!s.course.toLowerCase().includes(q)&&!(s.email||'').toLowerCase().includes(q)) return false;
+    if(lf&&s.level!==lf) return false;
+    if(sf&&getStatus(s)!==sf) return false;
+    return true;
+  });
+  const grid=document.getElementById('studentGrid');
+  if(!list.length){
+    grid.innerHTML=`<div class="empty-state"><h3>${students.length===0?'No students yet':'No results found'}</h3><p>${students.length===0?'Add your first student to get started.':'Try a different search or filter.'}</p></div>`;
+  } else { grid.innerHTML=list.map(cardHTML).join(''); }
+  updateStats();
+}
+
+function cardHTML(s){
+  const rem=s.totalSessions-s.usedSessions;
+  const status=getStatus(s);
+  const isMP=isMonthlyPass(s.course);
+  const pct=isMP?(status==='ok'?100:0):Math.max(0,Math.min(100,(rem/s.totalSessions)*100));
+  const fillClass=status==='empty'?'empty':status==='low'?'low':'';
+  const badgeClass=status==='empty'?'badge-empty':status==='low'?'badge-low':'badge-ok';
+  const badgeText=status==='empty'?'⚠ Payment Due':isMP?'Monthly Active':`${rem} session${rem!==1?'s':''} left`;
+  const totalPaid=[...(s.payments||[]),...(s.renewals||[])].reduce((n,p)=>n+(p.amount||0),0);
+  return `<div class="student-card">
+    <div class="card-top">
+      <div class="avatar" style="background:${avatarColor(s.name)}">${initials(s.name)}</div>
+      <div style="flex:1">
+        <div class="student-name">${s.name}</div>
+        <div class="student-meta">${s.email||''}${s.phone?' · '+s.phone:''}</div>
+        <div class="tags"><span class="tag tag-level">${s.level}</span><span class="tag tag-course">${s.course}</span></div>
+      </div>
+    </div>
+    ${s.notes?`<div class="card-notes">📋 ${s.notes}</div>`:''}
+    <div class="card-sessions">
+      <div class="session-row">
+        <span class="session-label">${isMP?'Monthly Pass':'Sessions: <strong>'+s.usedSessions+' / '+s.totalSessions+' used</strong>'}</span>
+        <span class="remaining-badge ${badgeClass}">${badgeText}</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill ${fillClass}" style="width:${pct}%"></div></div>
+      <div style="display:flex;justify-content:space-between;margin-top:6px">
+        ${s.startDate?`<span style="font-size:.72rem;color:var(--muted)">Started: ${fmtDate(s.startDate)}</span>`:'<span></span>'}
+        <span style="font-size:.72rem;color:var(--blue);font-weight:600">Total paid: €${totalPaid.toFixed(2)}</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-ghost btn-sm" onclick="openLogModal('${s.id}')">✓ Log Session</button>
+      <button class="btn btn-ghost btn-sm" onclick="openRenewModal('${s.id}')">🔄 Renew</button>
+      <div class="spacer"></div>
+      <button class="btn btn-ghost btn-sm" onclick="openEditModal('${s.id}')">✏</button>
+      <button class="btn btn-warm btn-sm" onclick="openEmailModal('${s.id}')">📧</button>
+      <button class="btn btn-danger btn-sm" onclick="deleteStudent('${s.id}')">🗑</button>
+    </div>
+  </div>`;
+}
+
+function updateStats(){
+  const thisYear=new Date().getFullYear().toString();
+  const inc=getAllPayments().filter(p=>(p.date||'').startsWith(thisYear)).reduce((n,p)=>n+(p.amount||0),0);
+  document.getElementById('statTotal').textContent=students.length;
+  document.getElementById('statActive').textContent=students.filter(s=>getStatus(s)==='ok'||getStatus(s)==='low').length;
+  document.getElementById('statLow').textContent=students.filter(s=>getStatus(s)==='low').length;
+  document.getElementById('statEmpty').textContent=students.filter(s=>getStatus(s)==='empty').length;
+  document.getElementById('statIncome').textContent=`€${inc.toFixed(0)}`;
+}
+
+// ---- ADD/EDIT ----
+function openAddModal(){
+  editingId=null;
+  document.getElementById('modalTitle').textContent='Add Student';
+  ['fName','fEmail','fPhone','fNotes','fCustomSessions'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fLevel').value='Beginner';
+  document.getElementById('fCourse').value='Monthly Pass (Online)';
+  document.getElementById('fPackage').value='4';
+  const today=new Date().toISOString().split('T')[0];
+  document.getElementById('fPaymentDate').value=today;
+  document.getElementById('fStartDate').value=today;
+  document.getElementById('customSessionsGroup').style.display='none';
+  autoFillPrice();
+  openModal('studentModal');
+}
+function openEditModal(id){
+  const s=students.find(x=>x.id===id); if(!s) return;
+  editingId=id;
+  document.getElementById('modalTitle').textContent='Edit Student';
+  document.getElementById('fName').value=s.name;
+  document.getElementById('fEmail').value=s.email||'';
+  document.getElementById('fPhone').value=s.phone||'';
+  document.getElementById('fLevel').value=s.level;
+  document.getElementById('fCourse').value=s.course;
+  document.getElementById('fStartDate').value=s.startDate||'';
+  document.getElementById('fNotes').value=s.notes||'';
+  document.getElementById('fAmount').value='';
+  document.getElementById('fPaymentDate').value=new Date().toISOString().split('T')[0];
+  document.getElementById('priceHint').textContent='';
+  const pkgOpts=['4','8','12','16'];
+  if(pkgOpts.includes(String(s.totalSessions))){ document.getElementById('fPackage').value=String(s.totalSessions); document.getElementById('customSessionsGroup').style.display='none'; }
+  else{ document.getElementById('fPackage').value='custom'; document.getElementById('fCustomSessions').value=s.totalSessions; document.getElementById('customSessionsGroup').style.display=''; }
+  openModal('studentModal');
+}
+function updatePackageHint(){ document.getElementById('customSessionsGroup').style.display=document.getElementById('fPackage').value==='custom'?'':'none'; }
+function autoFillPrice(){
+  const course=document.getElementById('fCourse').value;
+  const hint=document.getElementById('priceHint');
+  if(MONTHLY_PASS_PRICE[course]){ document.getElementById('fAmount').value=MONTHLY_PASS_PRICE[course]; hint.textContent=`Flat monthly rate: €${MONTHLY_PASS_PRICE[course]}`; return; }
+  const pkg=document.getElementById('fPackage').value;
+  const n=pkg==='custom'?parseInt(document.getElementById('fCustomSessions').value)||0:parseInt(pkg);
+  const pps=PRICE_PER_SESSION[course]||0;
+  if(pps&&n){ document.getElementById('fAmount').value=pps*n; hint.textContent=`€${pps} × ${n} = €${pps*n}`; }
+  else{ document.getElementById('fAmount').value=''; hint.textContent=pps?'':'Enter custom price'; }
+}
+function saveStudent(){
+  const name=document.getElementById('fName').value.trim();
+  if(!name){ alert('Name is required.'); return; }
+  const pkg=document.getElementById('fPackage').value;
+  const total=pkg==='custom'?parseInt(document.getElementById('fCustomSessions').value)||4:parseInt(pkg);
+  if(editingId){
+    const s=students.find(x=>x.id===editingId);
+    s.name=name; s.email=document.getElementById('fEmail').value.trim(); s.phone=document.getElementById('fPhone').value.trim();
+    s.level=document.getElementById('fLevel').value; s.course=document.getElementById('fCourse').value;
+    s.totalSessions=total; s.startDate=document.getElementById('fStartDate').value; s.notes=document.getElementById('fNotes').value.trim();
+  } else {
+    const amount=parseFloat(document.getElementById('fAmount').value)||0;
+    students.push({ id:genId(), name, email:document.getElementById('fEmail').value.trim(), phone:document.getElementById('fPhone').value.trim(),
+      level:document.getElementById('fLevel').value, course:document.getElementById('fCourse').value,
+      totalSessions:total, usedSessions:0, startDate:document.getElementById('fStartDate').value, notes:document.getElementById('fNotes').value.trim(),
+      sessionLog:[], renewals:[], payments:[{date:document.getElementById('fPaymentDate').value,sessions:total,amount,note:'Initial package',type:'initial'}] });
+  }
+  save(); renderStudents(); closeModal('studentModal');
+}
+function deleteStudent(id){
+  const s=students.find(x=>x.id===id); if(!s) return;
+  if(!confirm(`Delete ${s.name}? This cannot be undone.`)) return;
+  students=students.filter(x=>x.id!==id); save(); renderStudents();
+}
+
+// ---- LOG SESSION ----
+function openLogModal(id){
+  const s=students.find(x=>x.id===id); if(!s) return;
+  currentStudentId=id;
+  document.getElementById('logModalTitle').textContent=`Log Session — ${s.name}`;
+  document.getElementById('logDate').value=new Date().toISOString().split('T')[0];
+  document.getElementById('logNote').value='';
+  const log=(s.sessionLog||[]).slice().reverse();
+  document.getElementById('sessionHistory').innerHTML=log.length
+    ?'<div style="font-size:.8rem;font-weight:600;margin-bottom:8px;color:var(--muted)">SESSION HISTORY</div>'+log.map(l=>`<div class="log-entry"><span>${l.note||'Class attended'}</span><span class="log-date">${fmtDate(l.date)}</span></div>`).join('')
+    :'<p style="font-size:.8rem;color:var(--muted)">No sessions logged yet.</p>';
+  openModal('logModal');
+}
+function confirmLogSession(){
+  const s=students.find(x=>x.id===currentStudentId); if(!s) return;
+  if(s.usedSessions>=s.totalSessions&&!isMonthlyPass(s.course)){ if(!confirm('All sessions used. Log anyway?')) return; }
+  s.usedSessions++;
+  if(!s.sessionLog) s.sessionLog=[];
+  s.sessionLog.push({date:document.getElementById('logDate').value,note:document.getElementById('logNote').value.trim()});
+  save(); renderStudents(); closeModal('logModal');
+  if(getStatus(s)==='empty') setTimeout(()=>{ if(confirm(`${s.name} — payment due. Send reminder?`)) openEmailModal(currentStudentId); },200);
+}
+
+// ---- RENEW ----
+function openRenewModal(id){
+  const s=students.find(x=>x.id===id); if(!s) return;
+  currentStudentId=id;
+  document.getElementById('renewModalTitle').textContent=`Renew — ${s.name}`;
+  document.getElementById('renewPackage').value='4';
+  document.getElementById('renewCustomGroup').style.display='none';
+  document.getElementById('renewDate').value=new Date().toISOString().split('T')[0];
+  document.getElementById('renewNote').value='';
+  updateRenewHint();
+  openModal('renewModal');
+}
+function updateRenewHint(){
+  const s=students.find(x=>x.id===currentStudentId); if(!s) return;
+  const pkg=document.getElementById('renewPackage').value;
+  document.getElementById('renewCustomGroup').style.display=pkg==='custom'?'':'none';
+  if(MONTHLY_PASS_PRICE[s.course]){ document.getElementById('renewAmount').value=MONTHLY_PASS_PRICE[s.course]; document.getElementById('renewPriceHint').textContent=`Flat monthly: €${MONTHLY_PASS_PRICE[s.course]}`; return; }
+  const pps=PRICE_PER_SESSION[s.course]||0;
+  const n=pkg==='custom'?parseInt(document.getElementById('renewCustom').value)||0:parseInt(pkg);
+  if(pps&&n){ document.getElementById('renewAmount').value=pps*n; document.getElementById('renewPriceHint').textContent=`€${pps} × ${n} = €${pps*n}`; }
+  else document.getElementById('renewPriceHint').textContent='';
+}
+function confirmRenew(){
+  const s=students.find(x=>x.id===currentStudentId); if(!s) return;
+  const pkg=document.getElementById('renewPackage').value;
+  const add=pkg==='custom'?parseInt(document.getElementById('renewCustom').value)||4:parseInt(pkg);
+  const amount=parseFloat(document.getElementById('renewAmount').value)||0;
+  if(!amount&&!confirm('Amount is €0. Save anyway?')) return;
+  if(!s.renewals) s.renewals=[];
+  s.renewals.push({date:document.getElementById('renewDate').value,added:add,amount,note:document.getElementById('renewNote').value.trim()||'Renewal',type:'renewal'});
+  s.totalSessions+=add;
+  save(); renderStudents(); closeModal('renewModal');
+}
+
+// ---- EMAIL ----
+function buildEmailBody(s){
+  const rem=s.totalSessions-s.usedSessions, fn=s.name.split(' ')[0];
+  const isMP=isMonthlyPass(s.course), status=getStatus(s);
+  const msg=isMP?'your monthly pass has expired.':(rem<=0?`all ${s.totalSessions} sessions have been completed.`:`only ${rem} session${rem!==1?'s':''} remain.`);
+  return `Hi ${fn},\n\nI hope you're feeling great after your recent practice! 🙏\n\nI'm reaching out because ${msg}\n\n${status==='empty'?"It's time to renew so we can continue your journey without any gap.":"It's a good time to renew so you're all set for the upcoming weeks."}\n\nClass: ${s.course}\n${isMP?'Status: Monthly pass renewal needed':`Sessions used: ${s.usedSessions} of ${s.totalSessions}\nSessions remaining: ${Math.max(0,rem)}`}\n\nTo renew, simply reply to this email or WhatsApp me and I'll send you the payment details.\n\nWith love and light,\nUrja\nUrja Yoga\nurjaramanandi@gmail.com`;
+}
+function openEmailModal(id){
+  const s=students.find(x=>x.id===id); if(!s) return;
+  currentStudentId=id;
+  const body=buildEmailBody(s);
+  const subject=getStatus(s)==='empty'?`Time to renew — ${s.name.split(' ')[0]}!`:`Your yoga sessions are running low!`;
+  currentEmailTo=s.email||''; currentEmailBody=`Subject: ${subject}\n\n${body}`;
+  document.getElementById('emailPreview').textContent=currentEmailBody;
+  openModal('emailModal');
+}
+function sendEmailNow(){
+  const lines=currentEmailBody.split('\n'), sub=lines[0].replace('Subject: ',''), body=lines.slice(2).join('\n');
+  window.open(`mailto:${currentEmailTo}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`,'_blank');
+}
+function sendBulkReminders(){
+  const due=students.filter(s=>getStatus(s)==='empty'||getStatus(s)==='low');
+  if(!due.length){ alert('No students need a reminder right now. 🎉'); return; }
+  if(!confirm(`Send reminder to ${due.length} student${due.length!==1?'s':''}?`)) return;
+  due.forEach((s,i)=>setTimeout(()=>{
+    const body=buildEmailBody(s), sub=getStatus(s)==='empty'?'Time to renew your yoga package!':'Your yoga sessions are running low!';
+    window.open(`mailto:${s.email}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`,'_blank');
+  },i*600));
+}
+
+// ---- TAX REPORT ----
+function openTaxReport(){
+  const payments=getAllPayments();
+  const years=[...new Set(payments.map(p=>(p.date||'').slice(0,4)).filter(Boolean))].sort().reverse();
+  const thisYear=new Date().getFullYear().toString();
+  if(!years.includes(thisYear)) years.unshift(thisYear);
+  const ys=document.getElementById('taxYear');
+  ys.innerHTML=years.map(y=>`<option value="${y}">${y}</option>`).join('');
+  ys.value=thisYear;
+  document.getElementById('taxStudent').innerHTML='<option value="">All Students</option>'+students.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
+  renderTaxReport(); openModal('taxModal');
+}
+function renderTaxReport(){
+  const year=document.getElementById('taxYear').value, sf=document.getElementById('taxStudent').value;
+  let payments=getAllPayments().filter(p=>(p.date||'').startsWith(year));
+  if(sf) payments=payments.filter(p=>p.studentId===sf);
+  const total=payments.reduce((n,p)=>n+(p.amount||0),0);
+  document.getElementById('taxTotalIncome').textContent=`€${total.toFixed(2)}`;
+  document.getElementById('taxTotalSessions').textContent=payments.reduce((n,p)=>n+(p.sessions||0),0);
+  document.getElementById('taxTotalStudents').textContent=new Set(payments.map(p=>p.studentId)).size;
+  const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const byMonth={};
+  for(const p of payments){ const m=parseInt((p.date||'').slice(5,7))-1; if(isNaN(m)) continue; if(!byMonth[m]) byMonth[m]=[]; byMonth[m].push(p); }
+  const area=document.getElementById('taxTableArea');
+  if(!payments.length){ area.innerHTML=`<div class="no-data">No payment records for ${year}.</div>`; return; }
+  area.innerHTML=Object.keys(byMonth).sort((a,b)=>a-b).map(m=>{
+    const rows=byMonth[m], mt=rows.reduce((n,p)=>n+(p.amount||0),0);
+    return `<div class="tax-month-block"><div class="tax-month-header"><span>${MONTHS[m]} ${year}</span><span style="color:var(--blue)">€${mt.toFixed(2)}</span></div>
+    <table><thead><tr><th>Date</th><th>Student</th><th>Course</th><th>Sessions</th><th>Note</th><th style="text-align:right">Amount</th></tr></thead><tbody>
+    ${rows.map(p=>`<tr><td>${fmtDate(p.date)}</td><td>${p.studentName}</td><td style="font-size:.8rem">${p.course}</td><td style="text-align:center">${p.sessions||''}</td><td style="font-size:.8rem;color:var(--muted)">${p.note||''}</td><td class="td-amount">€${(p.amount||0).toFixed(2)}</td></tr>`).join('')}
+    <tr class="month-total-row"><td colspan="5" style="text-align:right;font-size:.8rem">Monthly Total</td><td class="td-amount">€${mt.toFixed(2)}</td></tr>
+    </tbody></table></div>`;
+  }).join('')+`<div style="text-align:right;padding:12px 10px;font-weight:700;color:var(--blue);border-top:2px solid var(--border)">Total ${year}: €${total.toFixed(2)}</div>`;
+}
+function buildCSVContent(){
+  const payments=getAllPayments();
+  const header=['Date','Student','Email','Course','Sessions','Amount (EUR)','Note','Type'];
+  const rows=payments.map(p=>{ const s=students.find(x=>x.id===p.studentId); return [p.date,p.studentName,s?.email||'',p.course,p.sessions||'',(p.amount||0).toFixed(2),p.note||'',p.type||'']; });
+  let csv=[header,...rows].map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+  if(expenses.length){
+    const eh=['Date','Type','Category','Description','Amount (EUR)'];
+    const er=expenses.map(e=>[e.date,'expense',e.category,e.desc||'',e.amount.toFixed(2)]);
+    csv+='\n\nEXPENSES\n'+[eh,...er].map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+  }
+  return csv;
+}
+function exportCSV(){
+  const year=document.getElementById('taxYear')?.value||new Date().getFullYear();
+  const blob=new Blob([buildCSVContent()],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob); const a=document.createElement('a');
+  a.href=url; a.download=`urja-yoga-income-${year}.csv`; a.click(); URL.revokeObjectURL(url);
+}
+
+// ---- EXPENSES ----
+function openExpenseModal(){
+  document.getElementById('eDate').value=new Date().toISOString().split('T')[0];
+  document.getElementById('eAmount').value=''; document.getElementById('eCategory').value='Rent'; document.getElementById('eDesc').value='';
+  openModal('expenseModal');
+}
+function saveExpense(){
+  const date=document.getElementById('eDate').value, amount=parseFloat(document.getElementById('eAmount').value);
+  if(!date||!amount){ alert('Date and amount required.'); return; }
+  expenses.push({id:genId(),date,amount,category:document.getElementById('eCategory').value,desc:document.getElementById('eDesc').value.trim()});
+  saveExpenses(); closeModal('expenseModal'); renderFinance();
+}
+function deleteExpense(id){ if(!confirm('Delete this expense?')) return; expenses=expenses.filter(e=>e.id!==id); saveExpenses(); renderFinance(); }
+
+// ---- FINANCE ----
+const MONTHS_FULL=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function initFinanceControls(){
+  const mSel=document.getElementById('finMonth'), ySel=document.getElementById('finYear');
+  if(mSel.options.length) return;
+  MONTHS_FULL.forEach((m,i)=>{ const o=document.createElement('option'); o.value=String(i+1).padStart(2,'0'); o.textContent=m; mSel.appendChild(o); });
+  const now=new Date(); mSel.value=String(now.getMonth()+1).padStart(2,'0');
+  for(let y=now.getFullYear();y>=now.getFullYear()-4;y--){ const o=document.createElement('option'); o.value=y; o.textContent=y; ySel.appendChild(o); }
+  ySel.value=now.getFullYear();
+}
+function renderFinance(){
+  initFinanceControls();
+  const month=document.getElementById('finMonth').value, year=document.getElementById('finYear').value, prefix=`${year}-${month}`;
+  const income=getAllPayments().filter(p=>(p.date||'').startsWith(prefix));
+  const monthExpenses=expenses.filter(e=>(e.date||'').startsWith(prefix));
+  const totalIncome=income.reduce((n,p)=>n+(p.amount||0),0);
+  const totalExpenses=monthExpenses.reduce((n,e)=>n+(e.amount||0),0);
+  const profit=totalIncome-totalExpenses;
+  document.getElementById('bsIncome').textContent=`€${totalIncome.toFixed(2)}`;
+  document.getElementById('bsExpense').textContent=`€${totalExpenses.toFixed(2)}`;
+  const pe=document.getElementById('bsProfit'); pe.textContent=`€${profit.toFixed(2)}`; pe.className='bs-num bs-profit '+(profit>=0?'positive':'negative');
+  document.getElementById('finIncomeTotal').textContent=`€${totalIncome.toFixed(2)}`;
+  document.getElementById('finExpenseTotal').textContent=`€${totalExpenses.toFixed(2)}`;
+  document.getElementById('finIncomeList').innerHTML=income.length
+    ?income.map(p=>`<div class="expense-row"><span class="expense-cat" style="background:var(--green-pale);color:var(--green)">${p.type==='initial'?'New':'Renewal'}</span><span class="expense-desc">${p.studentName}</span><span class="expense-date">${fmtDate(p.date)}</span><span class="expense-amt" style="color:var(--green)">+€${(p.amount||0).toFixed(2)}</span></div>`).join('')
+    :'<div class="no-items">No income recorded</div>';
+  document.getElementById('finExpenseList').innerHTML=monthExpenses.length
+    ?monthExpenses.sort((a,b)=>a.date<b.date?-1:1).map(e=>`<div class="expense-row"><span class="expense-cat">${e.category}</span><span class="expense-desc">${e.desc||'—'}</span><span class="expense-date">${fmtDate(e.date)}</span><span class="expense-amt">-€${e.amount.toFixed(2)}</span><button class="expense-del" onclick="deleteExpense('${e.id}')">✕</button></div>`).join('')
+    :'<div class="no-items">No expenses recorded</div>';
+}
+
+// ---- 15-DAY AUTO BACKUP ----
+function getFingerprint(){ return students.reduce((n,s)=>n+(s.sessionLog||[]).length+(s.renewals||[]).length+(s.payments||[]).length,0); }
+function check15DayBackup(){
+  if(!students.length) return;
+  const now=Date.now(), last=parseInt(localStorage.getItem('autoDownloadLastTime')||'0');
+  const lastFP=parseInt(localStorage.getItem('autoDownloadFingerprint')||'0'), curFP=getFingerprint();
+  if((now-last)/(1000*60*60*24)>=15&&curFP!==lastFP) setTimeout(()=>triggerAutoDownload(curFP),1200);
+}
+function triggerAutoDownload(fp){
+  const stamp=new Date().toISOString().slice(0,10);
+  downloadBlob(new Blob([JSON.stringify({students,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'}),`urja-yoga-${stamp}-data.json`);
+  setTimeout(()=>downloadBlob(new Blob([buildCSVContent()],{type:'text/csv'}),`urja-yoga-${stamp}-income.csv`),400);
+  localStorage.setItem('autoDownloadLastTime',Date.now().toString());
+  localStorage.setItem('autoDownloadFingerprint',(fp||getFingerprint()).toString());
+  const t=document.createElement('div');
+  t.style.cssText='position:fixed;bottom:24px;right:24px;background:#2d3a2e;color:white;padding:14px 20px;border-radius:10px;font-size:.85rem;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.25);display:flex;align-items:center;gap:10px';
+  t.innerHTML='<span style="font-size:1.2rem">💾</span><div><strong>Auto backup saved</strong><br><span style="opacity:.7;font-size:.78rem">Move downloaded files to your drive</span></div>';
+  document.body.appendChild(t); setTimeout(()=>t.remove(),5000);
+}
+function downloadBlob(blob,filename){ const url=URL.createObjectURL(blob),a=document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); }
+
+// ---- LOCAL BACKUP (File System Access) ----
+let backupDirHandle=null, backupLog=JSON.parse(localStorage.getItem('backupLog')||'[]');
+function openHandleDB(){ return new Promise((res,rej)=>{ const req=indexedDB.open('YogaBackup',1); req.onupgradeneeded=e=>e.target.result.createObjectStore('handles'); req.onsuccess=e=>res(e.target.result); req.onerror=rej; }); }
+async function storeHandle(h){ const db=await openHandleDB(); return new Promise((res,rej)=>{ const tx=db.transaction('handles','readwrite'); tx.objectStore('handles').put(h,'backupFolder'); tx.oncomplete=res; tx.onerror=rej; }); }
+async function loadHandle(){ const db=await openHandleDB(); return new Promise((res,rej)=>{ const tx=db.transaction('handles','readonly'); const req=tx.objectStore('handles').get('backupFolder'); req.onsuccess=e=>res(e.target.result||null); req.onerror=rej; }); }
+async function clearHandle(){ const db=await openHandleDB(); return new Promise((res,rej)=>{ const tx=db.transaction('handles','readwrite'); tx.objectStore('handles').delete('backupFolder'); tx.oncomplete=res; tx.onerror=rej; }); }
+function isFolderSet(){ return !!backupDirHandle; }
+function updateDriveBadge(){
+  const b=document.getElementById('driveBadge'), d=document.getElementById('driveDot'), l=document.getElementById('driveLabel');
+  if(isFolderSet()){ b.className='drive-badge connected'; d.className='drive-dot'; l.textContent='📁 '+(backupDirHandle.name||'Backup Folder'); }
+  else{ b.className='drive-badge disconnected'; d.className='drive-dot off'; l.textContent='Set Backup Folder'; }
+}
+function openDriveModal(){
+  if(isFolderSet()){
+    document.getElementById('driveSetupView').style.display='none'; document.getElementById('driveConnectedView').style.display='';
+    document.getElementById('folderNameLabel').textContent='Folder: '+backupDirHandle.name;
+    document.getElementById('autoBackupToggle').checked=localStorage.getItem('autoBackup')!=='false';
+    document.getElementById('lastBackupLabel').textContent=localStorage.getItem('lastBackupMonth')?'Last backup: '+localStorage.getItem('lastBackupMonth'):'No backup yet.';
+    document.getElementById('backupLog').innerHTML=backupLog.length?backupLog.slice().reverse().map(e=>`<div class="backup-log-entry"><span>${e.filename}</span><span class="${e.ok?'ok':'err'}">${e.ok?'✓ Saved':'✗ Failed'}</span><span>${e.date}</span></div>`).join(''):'<p style="color:var(--muted);font-size:.8rem">No backups yet.</p>';
+    document.getElementById('driveModalFooter').innerHTML=`<button class="btn btn-danger btn-sm" onclick="removeFolder()">Remove</button><div style="flex:1"></div><button class="btn btn-ghost" onclick="closeModal('driveModal')">Close</button><button class="btn btn-blue" onclick="triggerManualBackup()">💾 Backup Now</button>`;
+  } else {
+    document.getElementById('driveSetupView').style.display=''; document.getElementById('driveConnectedView').style.display='none';
+    document.getElementById('driveModalFooter').innerHTML=`<button class="btn btn-ghost" onclick="closeModal('driveModal')">Cancel</button><button class="btn btn-primary" onclick="pickFolder()">📂 Choose Folder</button>`;
+  }
+  openModal('driveModal');
+}
+async function pickFolder(){
+  if(!window.showDirectoryPicker){ alert('Use Chrome or Edge for this feature.'); return; }
+  try{ const h=await window.showDirectoryPicker({mode:'readwrite'}); backupDirHandle=h; await storeHandle(h); updateDriveBadge(); closeModal('driveModal'); await triggerManualBackup(); openDriveModal(); }
+  catch(e){ if(e.name!=='AbortError') alert('Could not open folder: '+e.message); }
+}
+async function removeFolder(){ if(!confirm('Remove backup folder?')) return; backupDirHandle=null; backupLog=[]; await clearHandle(); localStorage.removeItem('backupLog'); localStorage.removeItem('lastBackupMonth'); updateDriveBadge(); closeModal('driveModal'); }
+function saveAutoBackupSetting(){ localStorage.setItem('autoBackup',document.getElementById('autoBackupToggle').checked); }
+async function triggerManualBackup(){
+  if(!isFolderSet()){ alert('Please choose a backup folder first.'); return; }
+  const perm=await backupDirHandle.requestPermission({mode:'readwrite'}); if(perm!=='granted'){ alert('Permission denied.'); return; }
+  const btn=document.querySelector('[onclick="triggerManualBackup()"]');
+  if(btn){ btn.textContent='⏳ Saving…'; btn.disabled=true; }
+  const now=new Date(), stamp=now.toISOString().slice(0,7), dateStr=now.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}), prefix=`urja-yoga-${stamp}`;
+  const results=[];
+  for(const [fn,content] of [[`${prefix}-data.json`,JSON.stringify({students,exportedAt:now.toISOString()},null,2)],[`${prefix}-income.csv`,buildCSVContent()]]){
+    try{ const fh=await backupDirHandle.getFileHandle(fn,{create:true}); const w=await fh.createWritable(); await w.write(content); await w.close(); results.push({filename:fn,ok:true,date:dateStr}); }
+    catch(e){ results.push({filename:fn,ok:false,date:dateStr}); }
+  }
+  backupLog.push(...results); if(backupLog.length>40) backupLog=backupLog.slice(-40);
+  localStorage.setItem('backupLog',JSON.stringify(backupLog)); localStorage.setItem('lastBackupMonth',stamp);
+  if(btn){ btn.textContent=results.every(r=>r.ok)?'✅ Saved!':'⚠ Partial'; btn.disabled=false; setTimeout(()=>{ if(btn) btn.textContent='💾 Backup Now'; },2500); }
+}
+async function initBackup(){
+  try{ const h=await loadHandle(); if(h){ backupDirHandle=h; updateDriveBadge(); const perm=await h.queryPermission({mode:'readwrite'}); if(perm==='granted'){ const thisMonth=new Date().toISOString().slice(0,7); if(localStorage.getItem('lastBackupMonth')!==thisMonth&&localStorage.getItem('autoBackup')!=='false') await triggerManualBackup(); } } }
+  catch(e){}
+}
+
+// ---- MODAL HELPERS ----
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(el=>el.addEventListener('click',e=>{ if(e.target===el) el.classList.remove('open'); }));
+
+// ---- SEED INITIAL EXPENSES ----
+function seedInitialExpenses(){
+  if(localStorage.getItem('expensesSeeded')) return;
+  [{date:'2026-05-30',category:'Equipment',desc:'Rode Wireless Go 3 (Amazon)',amount:152.55},
+   {date:'2026-05-15',category:'Props',desc:'Yin Yoga pillow, meditation cushion, Om cushion, altar (Temu)',amount:85.16},
+   {date:'2026-05-15',category:'Props',desc:'Candles for room (Temu)',amount:13.89},
+   {date:'2026-05-15',category:'Props',desc:'Cushions, tea set, decor for yoga room (Temu)',amount:90.23},
+   {date:'2026-05-30',category:'Professional Development',desc:'Registration of Urja — EUIPO',amount:1050.00},
+   {date:'2026-06-05',category:'Insurance',desc:'Business Liability Insurance (andsafe BH268757436)',amount:99.84},
+   {date:'2026-06-06',category:'Rent',desc:'Workshop rental — The Lab Yoga Berlin',amount:249.90},
+  ].forEach(e=>expenses.push({id:genId(),...e}));
+  saveExpenses(); localStorage.setItem('expensesSeeded','1');
+}
+
+// ---- INIT ----
+document.getElementById('headerDate').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+seedInitialExpenses();
+renderStudents();
+initBackup();
+check15DayBackup();
+</script>
+</body>
+</html>
