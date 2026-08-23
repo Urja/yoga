@@ -20,11 +20,6 @@ export default function YinPage() {
           <p>In a Yin class, you hold poses for three to five minutes. The target is not the muscle — it is the connective tissue: the fascia, the ligaments, the joint capsules. These structures respond to gentle, sustained pressure over time. They do not respond to effort. They respond to time.</p>
           <p>In Deep Relaxation sessions, I pair Yin poses with a Himalayan singing bowl. The sound gives the nervous system something to rest on — a frequency that makes stillness easier to find, without requiring you to &quot;do&quot; meditation.</p>
 
-          <div className="bg-[#5C4A32] rounded-xl p-8 my-10">
-            <p className="font-serif text-[1.3rem] font-light italic text-[#F7F2EA] leading-relaxed">
-              &ldquo;The hardest thing I ask of students in yin class is to do nothing. To stop adjusting, fidgeting, and fixing. Just to stay.&rdquo;
-            </p>
-          </div>
 
           <h2 className="font-serif text-[2rem] font-light text-[#5C4A32]">What to expect</h2>
           <ul className="space-y-2">

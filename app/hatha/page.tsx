@@ -33,12 +33,6 @@ export default function HathaPage() {
             Instruction is intentionally minimal. The goal is not to follow me perfectly. The goal is to learn how to listen to your own body.
           </p>
 
-          <div className="bg-[#5C4A32] rounded-xl p-8 my-10">
-            <p className="font-serif text-[1.3rem] font-light italic text-[#F7F2EA] leading-relaxed">
-              &ldquo;The postures are not the destination. They are a means of arriving in your body.&rdquo;
-            </p>
-          </div>
-
           <h2 className="font-serif text-[2rem] font-light text-[#5C4A32]">What to Expect</h2>
           <ul className="space-y-2">
             {[

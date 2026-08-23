@@ -21,11 +21,6 @@ export default function SoundHealingPage() {
             The human body responds to sound physically, not just emotionally. Low, sustained frequencies slow brainwave activity — inducing the alpha and theta states associated with deep rest and light meditation. You do not need to believe this is happening for it to happen.
           </p>
 
-          <div className="bg-[#5C4A32] rounded-xl p-8 my-10">
-            <p className="font-serif text-[1.3rem] font-light italic text-[#F7F2EA] leading-relaxed">
-              &ldquo;Most students tell me the session felt like an hour. It was forty-five minutes. That is what a genuine shift in brainwave state feels like from the inside.&rdquo;
-            </p>
-          </div>
 
           <h2 className="font-serif text-[2rem] font-light text-[#5C4A32]">Deep Relaxation (Yin + Sound)</h2>
           <p>
