@@ -48,23 +48,13 @@ export default function SchedulePage() {
           <p className="text-[0.75rem] text-[#8B7355] mt-1">All times are Berlin time (CET/CEST). Click any class to book.</p>
         </div>
 
-        {/* Special sessions note */}
-        <div className="bg-[#F7F2EA] border border-[#EAE0CF] rounded-xl px-6 py-4 mb-4 flex items-center justify-between flex-wrap gap-4">
-          <p className="text-[0.85rem] text-[#8B7355]">Looking for <span className="text-[#5C4A32] font-medium">Deep Relaxation, Sound Bath, or a 1:1 session</span>? These are available on request.</p>
-          <div className="flex gap-3 flex-wrap">
-            <a href="https://wa.me/+4917668954497?text=Hi!%20I%20would%20like%20to%20enquire%20about%20a%20Deep%20Relaxation%2C%20Sound%20Bath%20or%201-on-1%20session." target="_blank" rel="noopener noreferrer" className="text-[0.75rem] font-medium px-4 py-2 rounded-full bg-[#7A9E7E] text-white hover:bg-[#526B55] transition-all">📲 WhatsApp</a>
-            <a href="mailto:urjaramanandi@gmail.com?subject=Special%20session%20enquiry" className="text-[0.75rem] font-medium px-4 py-2 rounded-full border border-[#DDD0BB] text-[#5C4A32] hover:border-[#7A9E7E] transition-all">✉ Email</a>
-          </div>
-        </div>
-
-        {/* Flexible timing note */}
-        <div className="bg-[#F7F2EA] border border-[#EAE0CF] rounded-xl px-6 py-4 mb-8 flex items-center justify-between flex-wrap gap-4">
-          <p className="text-[0.85rem] text-[#8B7355]">None of these times work for you? I can often accommodate different slots.</p>
-          <div className="flex gap-3 flex-wrap">
-            <a href="https://wa.me/+4917668954497?text=Hi!%20I%20would%20like%20to%20join%20a%20class%20but%20the%20listed%20times%20don't%20work%20for%20me.%20Could%20we%20find%20another%20time?" target="_blank" rel="noopener noreferrer" className="text-[0.75rem] font-medium px-4 py-2 rounded-full bg-[#7A9E7E] text-white hover:bg-[#526B55] transition-all">📲 WhatsApp</a>
-            <a href="mailto:urjaramanandi@gmail.com?subject=Class%20timing%20request" className="text-[0.75rem] font-medium px-4 py-2 rounded-full border border-[#DDD0BB] text-[#5C4A32] hover:border-[#7A9E7E] transition-all">✉ Email</a>
-          </div>
-        </div>
+        {/* Contact note */}
+        <p className="text-[0.8rem] text-[#8B7355] mb-8">
+          Need a different time, or looking for Deep Relaxation, Sound Bath or 1:1? Write to me on{' '}
+          <a href="https://wa.me/+4917668954497?text=Hi!%20I%20have%20a%20question%20about%20your%20classes." target="_blank" rel="noopener noreferrer" className="text-[#526B55] underline underline-offset-2">WhatsApp</a>
+          {' '}or{' '}
+          <a href="mailto:urjaramanandi@gmail.com" className="text-[#526B55] underline underline-offset-2">Email</a>.
+        </p>
 
         {/* Week navigation */}
         <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
