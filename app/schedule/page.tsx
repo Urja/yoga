@@ -45,22 +45,25 @@ export default function SchedulePage() {
           <h1 className="font-serif text-[clamp(2.2rem,5vw,3.5rem)] font-light text-[#5C4A32] mb-3">
             Find a class that <em>fits your week</em>
           </h1>
-          <p className="text-[0.75rem] text-[#8B7355] mt-1">All times are Berlin time (CET/CEST). Click any class to book.</p>
         </div>
 
         {/* Contact note */}
         <div className="bg-[#E8F0E9] border border-[#A8C5AB] rounded-xl px-5 py-4 mb-8">
           <p className="text-[0.85rem] text-[#526B55]">
-            Need a different time, or looking for Deep Relaxation, Sound Bath or 1:1? Write to me on{' '}
+            Looking for another time, Deep Relaxation, Sound Bath, or a 1:1 session? Message me on{' '}
             <a href="https://wa.me/+4917668954497?text=Hi!%20I%20have%20a%20question%20about%20your%20classes." target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-2 hover:text-[#3D5C40]">WhatsApp</a>
-            {' '}or{' '}
-            <a href="mailto:urjaramanandi@gmail.com" className="font-medium underline underline-offset-2 hover:text-[#3D5C40]">Email</a>.
+            {' '}or send me an{' '}
+            <a href="mailto:urjaramanandi@gmail.com" className="font-medium underline underline-offset-2 hover:text-[#3D5C40]">email</a>
+            , and we'll find the right option for you.
           </p>
         </div>
 
         {/* Week navigation */}
         <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
-          <span className="font-serif text-[1.3rem] font-light text-[#5C4A32]">{weekLabel}</span>
+          <div>
+            <span className="font-serif text-[1.3rem] font-light text-[#5C4A32]">{weekLabel}</span>
+            <span className="text-[0.7rem] text-[#8B7355] ml-3">Berlin time (CET/CEST)</span>
+          </div>
           <div className="flex gap-2">
             {([['←', -1],['Today', 0],['→', 1]] as const).map(([label, dir]) => (
               <button
