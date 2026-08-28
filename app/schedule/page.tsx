@@ -49,12 +49,14 @@ export default function SchedulePage() {
         </div>
 
         {/* Contact note */}
-        <p className="text-[0.8rem] text-[#8B7355] mb-8">
-          Need a different time, or looking for Deep Relaxation, Sound Bath or 1:1? Write to me on{' '}
-          <a href="https://wa.me/+4917668954497?text=Hi!%20I%20have%20a%20question%20about%20your%20classes." target="_blank" rel="noopener noreferrer" className="text-[#526B55] underline underline-offset-2">WhatsApp</a>
-          {' '}or{' '}
-          <a href="mailto:urjaramanandi@gmail.com" className="text-[#526B55] underline underline-offset-2">Email</a>.
-        </p>
+        <div className="bg-[#E8F0E9] border border-[#A8C5AB] rounded-xl px-5 py-4 mb-8">
+          <p className="text-[0.85rem] text-[#526B55]">
+            Need a different time, or looking for Deep Relaxation, Sound Bath or 1:1? Write to me on{' '}
+            <a href="https://wa.me/+4917668954497?text=Hi!%20I%20have%20a%20question%20about%20your%20classes." target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-2 hover:text-[#3D5C40]">WhatsApp</a>
+            {' '}or{' '}
+            <a href="mailto:urjaramanandi@gmail.com" className="font-medium underline underline-offset-2 hover:text-[#3D5C40]">Email</a>.
+          </p>
+        </div>
 
         {/* Week navigation */}
         <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
