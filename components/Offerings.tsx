@@ -58,7 +58,6 @@ export default function Offerings() {
                   ['Trial', 'First class', null, p.trial],
                   ['Drop-In', 'Per class', null, p.dropIn],
                   ['Weekly', null, 'Popular', p.weekly],
-                  ...(mode === 'online' ? [['Monthly', 'Unlimited', null, p.monthly] as const] : []),
                 ] as const).map(([label, detail, badge, price]) => (
                   <div key={label} className={`flex items-center justify-between px-3 py-2 rounded-lg text-[0.72rem] ${badge ? 'bg-[#E8F0E9] border border-[#7A9E7E]' : 'bg-[#FDFAF6] border border-[#EAE0CF]'}`}>
                     <span className="flex gap-2 items-center text-[#8B7355] font-medium uppercase tracking-wide">
