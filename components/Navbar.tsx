@@ -9,7 +9,6 @@ const links = [
   { href: '/schedule', label: 'Schedule' },
   { href: '/hatha', label: 'Hatha' },
   { href: '/sound-healing', label: 'Sound' },
-  { href: '/online', label: 'Online' },
   { href: '/events', label: 'Events' },
   // { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
