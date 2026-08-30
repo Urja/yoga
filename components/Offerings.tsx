@@ -1,15 +1,4 @@
-'use client'
-import { useState } from 'react'
-
-const hatha = {
-  online:  { trial: '€10', dropIn: '€15', weekly: '€50 / mo', monthly: '' },
-  studio:  { trial: '€10', dropIn: '€15', weekly: '€50 / mo', monthly: '' },
-}
-
 export default function Offerings() {
-  const [mode, setMode] = useState<'online' | 'studio'>('online')
-  const p = hatha[mode]
-
   return (
     <section className="bg-[#FDFAF6] py-24" id="offerings">
       <div className="max-w-[1100px] mx-auto px-8">
@@ -23,41 +12,21 @@ export default function Offerings() {
           </a>
         </div>
 
-        {/* Online / Studio toggle — only affects Hatha */}
-        <div className="flex items-center gap-1 mb-8 bg-[#EAE0CF] rounded-full p-1 w-fit">
-          {(['online', 'studio'] as const).map(m => (
-            <button
-              key={m}
-              onClick={() => setMode(m)}
-              className={`px-5 py-2 rounded-full text-[0.72rem] font-medium tracking-[0.1em] uppercase transition-all ${
-                mode === m
-                  ? 'bg-[#5C4A32] text-[#F7F2EA] shadow-sm'
-                  : 'text-[#8B7355] hover:text-[#5C4A32]'
-              }`}
-            >
-              {m === 'online' ? 'Online' : 'In Studio'}
-            </button>
-          ))}
-        </div>
-
         <div className="grid md:grid-cols-3 gap-6">
           {/* Hatha */}
           <div className="bg-[#F7F2EA] border border-[#EAE0CF] rounded-xl overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-lg hover:border-[#A8C5AB] transition-all">
             <div className="aspect-video bg-gradient-to-br from-[#E8F0E9] to-[#C5D9C7] relative">
               <span className="absolute top-3 left-3 bg-white/90 text-[#5C4A32] text-[0.6rem] font-medium tracking-[0.1em] uppercase px-3 py-1 rounded-full">Energising</span>
-              <span className="absolute top-3 right-3 bg-[#5C4A32]/80 text-[#F7F2EA] text-[0.6rem] font-medium tracking-[0.1em] uppercase px-3 py-1 rounded-full">
-                {mode === 'online' ? 'Online' : 'In Studio'}
-              </span>
             </div>
             <div className="p-6 flex flex-col flex-1">
-              <p className="text-[0.68rem] tracking-[0.12em] uppercase text-[#7A9E7E] mb-2">⏱ 45 min · Small group</p>
+              <p className="text-[0.68rem] tracking-[0.12em] uppercase text-[#7A9E7E] mb-2">⏱ 45 min · Online & In Studio</p>
               <h3 className="font-serif text-[1.5rem] font-normal text-[#5C4A32] mb-3">Hatha Yoga</h3>
               <p className="text-[0.85rem] text-[#8B7355] leading-relaxed mb-5">Uplifting movement that gradually awakens the body, releases stiffness, and sharpens focus through postures and conscious breathing. Taught slowly. Never rushed.</p>
               <div className="border-t border-[#EAE0CF] pt-4 space-y-2 mb-5">
                 {([
-                  ['Trial', 'First class', null, p.trial],
-                  ['Drop-In', 'Per class', null, p.dropIn],
-                  ['Weekly', null, 'Popular', p.weekly],
+                  ['Trial', 'First class', null, '€10'],
+                  ['Drop-In', 'Per class', null, '€15'],
+                  ['Weekly', null, 'Popular', '€50 / mo'],
                 ] as const).map(([label, detail, badge, price]) => (
                   <div key={label} className={`flex items-center justify-between px-3 py-2 rounded-lg text-[0.72rem] ${badge ? 'bg-[#E8F0E9] border border-[#7A9E7E]' : 'bg-[#FDFAF6] border border-[#EAE0CF]'}`}>
                     <span className="flex gap-2 items-center text-[#8B7355] font-medium uppercase tracking-wide">
@@ -70,7 +39,7 @@ export default function Offerings() {
                 ))}
               </div>
               <a
-                href={`https://wa.me/+4917668954497?text=${encodeURIComponent(`Hi! I would like to book a Hatha Yoga class (${mode === 'online' ? 'online' : 'in studio'}).`)}`}
+                href="https://wa.me/+4917668954497?text=Hi!%20I%20would%20like%20to%20book%20a%20Hatha%20Yoga%20class."
                 target="_blank" rel="noopener noreferrer"
                 className="mt-auto w-full text-center py-2.5 rounded-full bg-[#E8F0E9] border border-[#A8C5AB] text-[#526B55] text-[0.75rem] font-medium tracking-wide uppercase hover:bg-[#A8C5AB] hover:text-white transition-all"
               >
