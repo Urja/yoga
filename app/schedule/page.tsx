@@ -151,7 +151,7 @@ export default function SchedulePage() {
                     </div>
                   ))
                 ) : (
-                  [['Trial','€10'],['Drop-in','€15'],['4-Class Pass','€48 / month']].map(([label, price]) => (
+                  [['Trial','€10'],['Drop-in','€15'],['4-Class Pass','€50 / month']].map(([label, price]) => (
                     <div key={label} className="flex justify-between text-[0.82rem]">
                       <span className="text-[#8B7355]">{label}</span>
                       <span className="font-medium text-[#5C4A32]">{price}</span>
