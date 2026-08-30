@@ -150,15 +150,8 @@ export default function SchedulePage() {
                       <span className="font-medium text-[#5C4A32]">{price}</span>
                     </div>
                   ))
-                ) : modal.tpl.mode === 'Online' ? (
-                  [['Trial','€8'],['Drop-in','€15'],['4-Class Pass','€48 / month']].map(([label, price]) => (
-                    <div key={label} className="flex justify-between text-[0.82rem]">
-                      <span className="text-[#8B7355]">{label}</span>
-                      <span className="font-medium text-[#5C4A32]">{price}</span>
-                    </div>
-                  ))
                 ) : (
-                  [['Trial','€10'],['Drop-in','€18'],['4-Class Pass','€60 / month']].map(([label, price]) => (
+                  [['Trial','€10'],['Drop-in','€15'],['4-Class Pass','€48 / month']].map(([label, price]) => (
                     <div key={label} className="flex justify-between text-[0.82rem]">
                       <span className="text-[#8B7355]">{label}</span>
                       <span className="font-medium text-[#5C4A32]">{price}</span>
@@ -170,8 +163,7 @@ export default function SchedulePage() {
             {modal.tpl.id !== 'pranayama' && (
             <div className="bg-[#5C4A32] rounded-lg px-4 py-3 mb-3 text-[0.78rem] text-[#F7F2EA] leading-relaxed">
               {modal.tpl.mode === 'Online'
-                ? <>💡 <span className="font-medium">Pass available</span> — 4 classes €48/mo. Ask via WhatsApp.</>
-                : <>💡 <span className="font-medium">Pass available</span> — 4 classes €60/mo. Ask via WhatsApp for details.</>
+                <>💡 <span className="font-medium">Pass available</span> — 4 classes €48/mo. Ask via WhatsApp.</>
               }
             </div>
             )}
