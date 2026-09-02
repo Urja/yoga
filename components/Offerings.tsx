@@ -57,17 +57,12 @@ export default function Offerings() {
               <p className="text-[0.68rem] tracking-[0.12em] uppercase text-[#7A9E7E] mb-2">⏱ 45 min · In Studio</p>
               <h3 className="font-serif text-[1.5rem] font-normal text-[#5C4A32] mb-3">Deep Relaxation</h3>
               <p className="text-[0.85rem] text-[#8B7355] leading-relaxed mb-5">Gentle Yin poses held for several minutes with the calming resonance of a Himalayan singing bowl — soothing the nervous system and cultivating deep rest.</p>
-              <div className="border-t border-[#EAE0CF] pt-4 space-y-2 mb-5">
-                {([['Trial','First session only',null,'€12'],['Drop-In',null,'Popular','€20'],['Regular','Ongoing',null,'€16 / session']] as const).map(([label,detail,badge,price]) => (
-                  <div key={label} className={`flex items-center justify-between px-3 py-2 rounded-lg text-[0.72rem] ${badge ? 'bg-[#E8F0E9] border border-[#7A9E7E]' : 'bg-[#FDFAF6] border border-[#EAE0CF]'}`}>
-                    <span className="flex gap-2 items-center text-[#8B7355] font-medium uppercase tracking-wide">
-                      {label}
-                      {badge && <span className="bg-[#7A9E7E] text-white text-[0.55rem] px-2 py-0.5 rounded-full">{badge}</span>}
-                      {detail && <span className="font-normal opacity-70">{detail}</span>}
-                    </span>
-                    <span className="font-serif text-[1.1rem] text-[#5C4A32]">{price}</span>
-                  </div>
-                ))}
+              <div className="border-t border-[#EAE0CF] pt-4 mb-5">
+                <div className="flex items-center justify-between px-3 py-3 rounded-lg bg-[#E8F0E9] border border-[#A8C5AB] text-[0.72rem]">
+                  <span className="text-[#8B7355] font-medium uppercase tracking-wide">By appointment</span>
+                  <span className="font-serif text-[1.1rem] text-[#5C4A32]">€20 / session</span>
+                </div>
+                <p className="text-[0.75rem] text-[#8B7355] mt-3 leading-relaxed">Not a regular class — write to me to schedule a session.</p>
               </div>
               <a href="https://wa.me/+4917668954497?text=Hi!%20I%20would%20like%20to%20book%20a%20Deep%20Relaxation%20session." target="_blank" rel="noopener noreferrer" className="mt-auto w-full text-center py-2.5 rounded-full bg-[#E8F0E9] border border-[#A8C5AB] text-[#526B55] text-[0.75rem] font-medium tracking-wide uppercase hover:bg-[#A8C5AB] hover:text-white transition-all">
                 📲 Enquire via WhatsApp
