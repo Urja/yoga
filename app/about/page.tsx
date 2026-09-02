@@ -29,7 +29,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="rounded-xl overflow-hidden aspect-[3/4] max-h-[340px] md:max-h-none">
-              <img src="/images/urja-portrait.jpg" alt="Urja" className="w-full h-full object-cover" style={{objectPosition: '50% 20%'}} />
+              <img src="/images/aboutme.jpg" alt="Urja" className="w-full h-full object-cover" style={{objectPosition: '50% 20%'}} />
             </div>
           </div>
 
