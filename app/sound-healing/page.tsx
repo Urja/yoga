@@ -45,7 +45,7 @@ export default function SoundHealingPage() {
             <img src="/images/singing-bowls.jpg" alt="Private sound bath — Himalayan singing bowls" className="w-full h-full object-cover object-center" />
           </div>
           <p>
-            Private Sound Bath sessions — with singing bowls, gong, and chimes — are available on request. If you are interested in booking one for yourself or a small group, reach out directly.
+            Private Sound Bath sessions — with Himalayan singing bowls — are available on request. If you are interested in booking one for yourself or a small group, reach out directly.
           </p>
 
           <div className="bg-[#E8F0E9] border border-[#A8C5AB] rounded-xl p-6">
