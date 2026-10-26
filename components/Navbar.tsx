@@ -12,6 +12,7 @@ const links = [
   { href: '/events', label: 'Events' },
   { href: '/hatha', label: 'Hatha' },
   { href: '/sound-healing', label: 'Sound' },
+  { href: '/moment', label: 'Moment' },
   { href: '/contact', label: 'Contact' },
 ]
 
