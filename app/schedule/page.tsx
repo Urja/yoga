@@ -41,7 +41,7 @@ export default function SchedulePage() {
       <div className="max-w-[1100px] mx-auto px-8">
 
         <div className="mb-10">
-          <p className="text-[0.7rem] font-medium tracking-[0.2em] uppercase text-[#526B55] mb-3">Weekly Schedule</p>
+          <p className="text-[0.7rem] font-medium tracking-[0.2em] uppercase text-[#526B55] mb-3">Classes</p>
           <h1 className="font-serif text-[clamp(2.2rem,5vw,3.5rem)] font-light text-[#5C4A32] mb-3">
             Find a class that <em>fits your week</em>
           </h1>
