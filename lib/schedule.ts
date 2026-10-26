@@ -24,16 +24,18 @@ export const CLASS_TEMPLATES: ClassTemplate[] = [
 ]
 
 export const RECURRING_SLOTS: RecurringSlot[] = [
-  // Hatha Yoga online — Mon to Fri 11:30
+  // Hatha Yoga online — Mon, Wed, Fri 11:30
   { dayOfWeek: 0, time: '11:30', templateId: 'h-online' },
-  { dayOfWeek: 1, time: '11:30', templateId: 'h-online' },
   { dayOfWeek: 2, time: '11:30', templateId: 'h-online' },
-  { dayOfWeek: 3, time: '11:30', templateId: 'h-online' },
   { dayOfWeek: 4, time: '11:30', templateId: 'h-online' },
+
+  // Hatha Yoga online — Mon, Wed evening 19:00
+  { dayOfWeek: 0, time: '19:00', templateId: 'h-online' },
+  { dayOfWeek: 2, time: '19:00', templateId: 'h-online' },
 
   // Hatha Yoga in studio — Sunday 10:30
   { dayOfWeek: 6, time: '10:30', templateId: 'h-studio' },
 
-  // Pranayama online — Friday 18:30
-  { dayOfWeek: 4, time: '18:30', templateId: 'pranayama' },
+  // Pranayama online — Friday 19:00
+  { dayOfWeek: 4, time: '19:00', templateId: 'pranayama' },
 ]
