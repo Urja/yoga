@@ -48,7 +48,7 @@ export default function ContactPage() {
                     {d.href ? (
                       <a href={d.href} target={d.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" className="text-[0.9rem] text-[#8B7355] hover:text-[#526B55] transition-colors">{d.value}</a>
                     ) : (
-                      <p className="text-[0.9rem] text-[#8B7355]">{d.value}{d.sub && <><br /><em className="text-[0.78rem] opacity-70">{d.sub}</em></>}</p>
+                      <p className="text-[0.9rem] text-[#8B7355]">{d.value}</p>
                     )}
                   </div>
                 </div>
