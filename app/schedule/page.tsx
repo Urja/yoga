@@ -162,9 +162,7 @@ export default function SchedulePage() {
             </div>
             {modal.tpl.id !== 'pranayama' && (
             <div className="bg-[#5C4A32] rounded-lg px-4 py-3 mb-3 text-[0.78rem] text-[#F7F2EA] leading-relaxed">
-              {modal.tpl.mode === 'Online'
-                <>💡 <span className="font-medium">Pass available</span> — 4 classes €48/mo. Ask via WhatsApp.</>
-              }
+              💡 <span className="font-medium">Pass available</span> — 4 classes €50/mo. Ask via WhatsApp.
             </div>
             )}
             <div className="space-y-3">
