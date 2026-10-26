@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://www.urja.yoga',
   },
+  verification: {
+    google: '4HCDRSt44k6zTfyDQ5QEF_jcO8j6GNvCzTTz4TBb96A',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
