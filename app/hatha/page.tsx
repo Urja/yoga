@@ -33,6 +33,12 @@ export default function HathaPage() {
             Instruction is intentionally minimal. The goal is not to follow me perfectly. The goal is to learn how to listen to your own body.
           </p>
 
+          <h2 className="font-serif text-[2rem] font-light text-[#5C4A32]">Online Classes</h2>
+          <p>
+            Online classes are live, not recorded. That distinction matters. I can see you, adjust cues for your setup, and give the same quality of attention I give in the studio — within a small group that makes that possible.
+          </p>
+          <p>All you need is enough floor space for a mat, a device you can prop up to show your full body, and a quiet thirty minutes to yourself.</p>
+
           <h2 className="font-serif text-[2rem] font-light text-[#5C4A32]">What to Expect</h2>
           <ul className="space-y-2">
             {[
@@ -66,23 +72,6 @@ export default function HathaPage() {
           </ul>
           <p className="text-[0.9rem] italic text-[#8B7355]">No previous yoga experience is required.</p>
 
-          <h2 className="font-serif text-[2rem] font-light text-[#5C4A32]">Pricing</h2>
-          <div className="space-y-2">
-            {[
-              ['Trial', 'First class only', '€8 online · €10 studio'],
-              ['Drop-In', 'Per class', '€15 online · €18 studio'],
-              ['Weekly', '1× per week / month', '€48 online · €60 studio /mo'],
-            ].map(([label, detail, price]) => (
-              <div key={label} className="flex items-center justify-between px-4 py-3 rounded-lg bg-[#FDFAF6] border border-[#EAE0CF] text-[0.85rem]">
-                <span>
-                  <span className="font-medium text-[#5C4A32] uppercase tracking-wide text-[0.72rem]">{label}</span>
-                  <span className="text-[#8B7355] ml-2 text-[0.78rem]">{detail}</span>
-                </span>
-                <span className="font-serif text-[1.1rem] text-[#5C4A32]">{price}</span>
-              </div>
-            ))}
-          </div>
-
           <div className="bg-[#E8F0E9] border border-[#A8C5AB] rounded-xl p-6 mt-8 flex items-center justify-between flex-wrap gap-4">
             <div>
               <p className="font-medium text-[#5C4A32] mb-1">Ready to start?</p>
@@ -102,12 +91,6 @@ export default function HathaPage() {
               </a>
             </div>
           </div>
-
-          {/* <p className="text-center pt-4">
-            <Link href="/blog/why-i-teach-slowly" className="text-[#526B55] hover:underline text-[0.9rem]">
-              Read: Why I teach slowly — and why it matters more than you might think →
-            </Link>
-          </p> */}
         </div>
       </section>
     </main>
