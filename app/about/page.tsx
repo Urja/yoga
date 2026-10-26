@@ -3,7 +3,7 @@ export default function AboutPage() {
     <main>
       <section className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden">
         <div className="absolute inset-0">
-          <img src="/images/wheel-pose.jpg" alt="Urja in wheel pose" className="w-full h-full object-cover object-center" />
+          <img src="/images/AboutmeTop.jpg" alt="Urja" className="w-full h-full object-cover object-center" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#F7F2EA] via-[#F7F2EA]/40 to-transparent" />
         </div>
         <div className="relative z-10 max-w-[780px] mx-auto px-8 pt-40">
