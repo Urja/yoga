@@ -16,9 +16,11 @@ function getMondayOf(weekOffset: number): Date {
 }
 
 const TYPE_COLORS: Record<string, string> = {
-  hatha:    'border-t-[#7A9E7E]',
-  yin:      'border-t-[#9B8EC4]',
-  personal: 'border-t-[#8B7355]',
+  hatha:              'border-t-[#7A9E7E]',
+  yin:                'border-t-[#9B8EC4]',
+  personal:           'border-t-[#8B7355]',
+  'h-beginner-studio':'border-t-[#E8A87C]',
+  'h-beginner-online':'border-t-[#E8A87C]',
 }
 
 interface ModalData {
@@ -87,7 +89,7 @@ export default function SchedulePage() {
                     <div
                       key={slot.time}
                       onClick={() => !isPast && setModal({ tpl, time: slot.time, date: `${dayName} ${date.getDate()} ${MONTHS[date.getMonth()]}` })}
-                      className={`bg-[#FDFAF6] border border-[#EAE0CF] border-t-4 ${TYPE_COLORS[tpl.type] ?? 'border-t-[#8B7355]'} rounded-lg p-2 mb-2 text-center transition-all
+                      className={`bg-[#FDFAF6] border border-[#EAE0CF] border-t-4 ${TYPE_COLORS[tpl.id] ?? TYPE_COLORS[tpl.type] ?? 'border-t-[#8B7355]'} rounded-lg p-2 mb-2 text-center transition-all
                         ${isPast ? 'opacity-35 cursor-default' : 'cursor-pointer hover:-translate-y-0.5 hover:shadow-md hover:border-[#A8C5AB]'}`}
                     >
                       <p className="text-[0.65rem] font-medium text-[#526B55] mb-0.5">{slot.time}</p>
@@ -103,7 +105,7 @@ export default function SchedulePage() {
 
         {/* Legend */}
         <div className="flex gap-6 flex-wrap mt-8 pt-6 border-t border-[#EAE0CF]">
-          {[['#7A9E7E','Hatha Yoga'],['#9B8EC4','Deep Relaxation']].map(([color,label]) => (
+          {[['#7A9E7E','Hatha Yoga'],['#9B8EC4','Deep Relaxation'],['#E8A87C','Beginner Hatha']].map(([color,label]) => (
             <div key={label} className="flex items-center gap-2">
               <div className="w-2.5 h-2.5 rounded-sm" style={{background: color}} />
               <span className="text-[0.72rem] text-[#8B7355]">{label}</span>
