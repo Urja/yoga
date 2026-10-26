@@ -14,6 +14,7 @@ body {
   line-height: 1.6;
 }
 
+/* HEADER */
 header {
   display: flex;
   justify-content: space-between;
@@ -28,9 +29,18 @@ nav a {
   font-size: 14px;
 }
 
+/* HERO */
 .hero {
-  text-align: center;
-  padding: 100px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  gap: 40px;
+}
+
+.hero-text {
+  max-width: 450px;
 }
 
 .hero h1 {
@@ -38,11 +48,13 @@ nav a {
   font-weight: 500;
 }
 
-.hero p {
-  max-width: 500px;
-  margin: 20px auto;
+.hero img {
+  width: 320px;
+  border-radius: 12px;
+  object-fit: cover;
 }
 
+/* BUTTON */
 .button {
   display: inline-block;
   background: #8A9A8A;
@@ -50,8 +62,10 @@ nav a {
   padding: 12px 28px;
   text-decoration: none;
   margin-top: 20px;
+  border-radius: 4px;
 }
 
+/* SECTIONS */
 .section {
   max-width: 900px;
   margin: auto;
@@ -60,9 +74,9 @@ nav a {
 
 h2 {
   font-weight: 500;
-  margin-bottom: 20px;
 }
 
+/* CARDS */
 .cards {
   display: flex;
   gap: 20px;
@@ -74,11 +88,25 @@ h2 {
   padding: 20px;
   flex: 1;
   min-width: 260px;
+  border-radius: 6px;
 }
 
 .highlight {
   color: #8A9A8A;
   font-size: 14px;
+}
+
+/* ABOUT IMAGE */
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+}
+
+.about-container img {
+  width: 280px;
+  border-radius: 10px;
 }
 
 footer {
@@ -101,20 +129,42 @@ footer {
   </nav>
 </header>
 
+<!-- HERO WITH YOUR PHOTO -->
 <section class="hero">
-  <h1>Find Calm in Your Body and Mind</h1>
-  <p>Small group yoga (max 3 people) focused on nervous system balance and inner stability.</p>
-  <a href="https://wa.me/49123456789" class="button">Book on WhatsApp</a>
+
+  <img src="/images/cover.jpeg" alt="Yoga Teacher">
+
+  <div class="hero-text">
+    <h1>Find Calm in Your Body and Mind</h1>
+    <p>
+      Small group yoga (max 3 people) focused on nervous system balance,
+      grounding, and inner stability.
+    </p>
+
+    <a href="https://wa.me/49123456789" class="button">Book on WhatsApp</a>
+  </div>
+
 </section>
 
+<!-- ABOUT -->
 <section id="about" class="section">
   <h2>About Me</h2>
-  <p>
-    Hi, I’m Urja. I teach traditional Hatha and Ashtanga yoga with a gentle focus on calming the nervous system.
-    My approach is personal, structured, and designed to help you feel grounded, safe, and balanced.
-  </p>
+
+  <div class="about-container">
+
+    <img src="/mnt/data/6563293F-FFDE-4888-911C-06CDE9E366C5.jpeg" alt="About Teacher">
+
+    <p>
+      Hi, I’m Urja. I teach traditional Hatha and Ashtanga yoga with a gentle focus on calming the nervous system.
+      My approach is personal, structured, and designed to help you feel grounded, safe, and balanced in your body and mind.
+      <br><br>
+      I offer small group sessions (max 3 people), private sessions, and occasional sound healing for couples.
+    </p>
+
+  </div>
 </section>
 
+<!-- CLASSES -->
 <section id="classes" class="section">
   <h2>Offerings</h2>
 
@@ -122,29 +172,29 @@ footer {
 
     <div class="card">
       <h3>Small Group Yoga</h3>
-      <p class="highlight">Max 3 people · Personal attention</p>
-      <p>Single class: €15</p>
-      <p>5-class pass: €65</p>
-      <a href="https://wa.me/+4917668954497" class="button">Book</a>
+      <p class="highlight">Max 3 people</p>
+      <p>€15 per class</p>
+      <p>€65 for 5 classes</p>
+      <a href="https://wa.me/+4917668954497"" class="button">Book</a>
     </div>
 
     <div class="card">
       <h3>Private Session</h3>
-      <p>Personalised 1:1 yoga session</p>
-      <p>€60 per session</p>
-      <a href="https://wa.me/+4917668954497" class="button">Book</a>
+      <p>1:1 personalized yoga</p>
+      <p>€20 per session</p>
+      <a href="https://wa.me/+4917668954497"" class="button">Book</a>
     </div>
 
     <div class="card">
       <h3>Sound Healing (Couples)</h3>
-      <p class="highlight">Wed & Thu · Private experience</p>
-      <p>€70 per session</p>
-      <a href="https://wa.me/+4917668954497" class="button">Book</a>
+      <p class="highlight">Wed & Thu</p>
+      <p>€50 per session</p>
+      <a href="https://wa.me/+4917668954497"" class="button">Book</a>
     </div>
 
     <div class="card">
       <h3>Yin Yoga & Pranayama</h3>
-      <p class="highlight">Occasional special sessions</p>
+      <p>Occasional sessions</p>
       <p>€20 per session</p>
       <a href="https://wa.me/+4917668954497" class="button">Book</a>
     </div>
@@ -152,20 +202,17 @@ footer {
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact" class="section">
   <h2>Contact</h2>
-  <p>Email: your@email.com</p>
-  <p>WhatsApp: +49 176 68954497</p>
+  <p>Email: urja.ramanandi@gmail.com</p>
+  <p>WhatsApp: +49 176 68954497"</p>
 
-  <p style="margin-top:20px;">
-    Or send a message to book your session.
-  </p>
-
-  <a href="mailto:urja.ramanandi@gmail.com" class="button">Email Me</a>
+  <a href="mailto:your@email.com" class="button">Email Me</a>
 </section>
 
 <footer>
-  <p>© 2026 Urja Yoga Studio · Berlin</p>
+  <p>© 2026 Urja Yoga Studio</p>
 </footer>
 
 </body>
