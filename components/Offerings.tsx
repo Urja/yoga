@@ -2,8 +2,8 @@
 import { useState } from 'react'
 
 const hatha = {
-  online:  { trial: '€8', dropIn: '€15', weekly: '€48 / mo', monthly: '€150 / mo' },
-  studio:  { trial: '€10', dropIn: '€18', weekly: '€60 / mo', monthly: '€200 / mo' },
+  online:  { trial: '€10', dropIn: '€15', weekly: '€50 / mo', monthly: '' },
+  studio:  { trial: '€10', dropIn: '€15', weekly: '€50 / mo', monthly: '' },
 }
 
 export default function Offerings() {
