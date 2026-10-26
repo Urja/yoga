@@ -37,8 +37,8 @@ export default function HomePage() {
         </div>
         <div className="relative h-screen overflow-hidden">
           <img
-            src="/images/studio.jpg"
-            alt="Urja Yoga studio"
+            src="/images/HomePage_Hero.jpg"
+            alt="Urja Yoga"
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#F7F2EA] via-[#F7F2EA]/20 to-transparent" />
