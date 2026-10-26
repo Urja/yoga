@@ -45,11 +45,11 @@ export default function EventsPage() {
               </div>
 
               <a
-                href="https://wa.me/+4917668954497?text=Hi%20Urja!%20I%20would%20like%20to%20join%20the%20Yoga%20in%20the%20Park%20session%20on%205%20July."
+                href="https://www.eventbrite.de/e/free-community-yoga-tickets-1992429798161"
                 target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#7A9E7E] text-[#FDFAF6] text-[0.78rem] font-medium tracking-[0.08em] uppercase hover:bg-[#526B55] transition-all"
               >
-                I&apos;m coming — WhatsApp
+                Register on Eventbrite
               </a>
             </div>
           </div>
