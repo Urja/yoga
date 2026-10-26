@@ -148,7 +148,7 @@ export default function SchedulePage() {
                     </div>
                   ))
                 ) : modal.tpl.mode === 'Online' ? (
-                  [['Trial','€8'],['Drop-in','€15'],['4-Class Pass','€48 / month'],['Unlimited Membership','€150 / month']].map(([label, price]) => (
+                  [['Trial','€8'],['Drop-in','€15'],['4-Class Pass','€48 / month']].map(([label, price]) => (
                     <div key={label} className="flex justify-between text-[0.82rem]">
                       <span className="text-[#8B7355]">{label}</span>
                       <span className="font-medium text-[#5C4A32]">{price}</span>
@@ -167,7 +167,7 @@ export default function SchedulePage() {
             {modal.tpl.id !== 'pranayama' && (
             <div className="bg-[#5C4A32] rounded-lg px-4 py-3 mb-3 text-[0.78rem] text-[#F7F2EA] leading-relaxed">
               {modal.tpl.mode === 'Online'
-                ? <>💡 <span className="font-medium">Passes available</span> — 4 classes €48/mo · Unlimited €150/mo. Ask via WhatsApp.</>
+                ? <>💡 <span className="font-medium">Pass available</span> — 4 classes €48/mo. Ask via WhatsApp.</>
                 : <>💡 <span className="font-medium">Pass available</span> — 4 classes €60/mo. Ask via WhatsApp for details.</>
               }
             </div>

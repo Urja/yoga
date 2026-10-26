@@ -22,7 +22,7 @@ export default function OnlinePage() {
 
           <h2 className="font-serif text-[2rem] font-light text-[#5C4A32]">Pricing</h2>
           <div className="space-y-2">
-            {[['Trial','First class only','€8'],['Drop-In','Per class','€15'],['Weekly','Once a week / month','€48 / mo'],['Monthly','Unlimited','€150 / mo']].map(([label,detail,price]) => (
+            {[['Trial','First class only','€8'],['Drop-In','Per class','€15'],['Weekly','Once a week / month','€48 / mo']].map(([label,detail,price]) => (
               <div key={label} className="flex items-center justify-between px-4 py-3 rounded-lg bg-[#FDFAF6] border border-[#EAE0CF] text-[0.85rem]">
                 <span className="font-medium text-[#5C4A32] uppercase tracking-wide text-[0.72rem]">{label} <span className="font-normal text-[#8B7355] normal-case tracking-normal">{detail}</span></span>
                 <span className="font-serif text-[1.2rem] text-[#5C4A32]">{price}</span>
