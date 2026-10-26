@@ -93,9 +93,15 @@ export default function SchedulePage() {
             return (
               <div key={d} className="min-w-0">
                 <div className="text-center mb-2">
-                  <p className="text-[0.62rem] font-medium tracking-[0.12em] uppercase text-[#8B7355]">{dayName}</p>
-                  <p className={`font-serif text-[1.3rem] ${isToday ? 'text-[#526B55]' : 'text-[#5C4A32]'}`}>{date.getDate()}</p>
-                  {isToday && <div className="w-1 h-1 rounded-full bg-[#7A9E7E] mx-auto mt-0.5" />}
+                  <p className={`text-[0.62rem] font-medium tracking-[0.12em] uppercase ${isToday ? 'text-[#526B55]' : 'text-[#8B7355]'}`}>{dayName}</p>
+                  {isToday ? (
+                    <div className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-[#7A9E7E] mt-0.5">
+                      <span className="font-serif text-[1.2rem] text-white leading-none">{date.getDate()}</span>
+                    </div>
+                  ) : (
+                    <p className="font-serif text-[1.3rem] text-[#5C4A32]">{date.getDate()}</p>
+                  )}
+                  {isPast && <p className="text-[0.52rem] tracking-[0.1em] uppercase text-[#C4B49A] mt-0.5">past</p>}
                 </div>
                 {slots.length === 0 && (
                   <div className="h-16 flex items-center justify-center text-[0.65rem] text-[#DDD0BB]">—</div>
@@ -108,7 +114,7 @@ export default function SchedulePage() {
                       key={slot.time}
                       onClick={() => !isPast && setModal({ tpl, time: slot.time, date: `${dayName} ${date.getDate()} ${MONTHS[date.getMonth()]}` })}
                       className={`border border-[#EAE0CF] border-t-4 rounded-lg p-2 mb-2 text-center transition-all
-                        ${isPast ? 'bg-[#F7F2EA] opacity-35 cursor-default' : 'bg-[#FDFAF6] cursor-pointer hover:-translate-y-0.5 hover:shadow-md'}`}
+                        ${isPast ? 'bg-[#F7F2EA] opacity-40 cursor-default' : 'bg-[#FDFAF6] cursor-pointer hover:-translate-y-0.5 hover:shadow-md'}`}
                       style={{ borderTopColor: color }}
                     >
                       <p className="text-[0.65rem] font-medium text-[#526B55] mb-0.5">{slot.time}</p>
