@@ -18,7 +18,7 @@ export default function HomePage() {
           </div>
           <h1 className="font-serif text-[clamp(3rem,6.5vw,5.2rem)] font-light leading-[1.1] text-[#5C4A32] mb-6">
             A journey into<br />
-            <em className="text-[#526B55]">calm & stillness.</em>
+            <em className="text-[#526B55]">stillness & strength.</em>
           </h1>
           <p className="text-[1rem] text-[#8B7355] max-w-md mb-3 leading-[1.8]">
             Through hatha, yin, pranayama & sound, I guide you back to calm, stillness, and yourself.
