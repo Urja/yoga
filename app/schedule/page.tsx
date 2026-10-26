@@ -35,13 +35,6 @@ const CATEGORIES = [
     color: '#C4848A',
   },
   {
-    id: 'fertility',
-    label: 'Fertility Support',
-    desc: 'A gentle practice designed to support body and mind through the fertility journey.',
-    templateIds: ['fertility-online'],
-    color: '#B8A0C8',
-  },
-  {
     id: 'sitting',
     label: 'Sitting Job Reset',
     desc: 'For desk workers — releases tight hips, back, shoulders and neck built up from a day of sitting.',
