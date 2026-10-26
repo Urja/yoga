@@ -10,13 +10,50 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* No upcoming events */}
+      {/* Upcoming Events */}
       <section className="py-16 bg-[#FDFAF6]">
         <div className="max-w-[780px] mx-auto px-8">
           <p className="text-[0.7rem] font-medium tracking-[0.2em] uppercase text-[#526B55] mb-8">Upcoming</p>
-          <div className="bg-[#F7F2EA] border border-[#EAE0CF] rounded-2xl px-8 py-12 text-center">
-            <p className="font-serif text-[1.3rem] font-light text-[#5C4A32] mb-3">No events scheduled right now.</p>
-            <p className="text-[0.9rem] text-[#8B7355]">New events will be announced here — or reach out via WhatsApp to be notified directly.</p>
+
+          <div className="bg-[#F7F2EA] border border-[#EAE0CF] rounded-2xl overflow-hidden">
+            <div className="aspect-[16/6] relative overflow-hidden bg-[#3D4A2E]">
+              <img src="/images/event8_aug.jpeg" alt="Yoga in the Park" className="w-full h-full object-cover object-[center_15%] opacity-90" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#3D4A2E]/70 to-transparent" />
+              <span className="absolute top-4 left-4 text-[0.6rem] font-medium tracking-[0.15em] uppercase bg-white/80 text-[#526B55] px-3 py-1 rounded-full">Free Community Yoga</span>
+            </div>
+            <div className="p-8 md:p-10 space-y-6">
+              <div>
+                <h2 className="font-serif text-[2rem] font-light text-[#5C4A32] leading-snug mb-2">Yoga in the Park</h2>
+                <p className="text-[#8B7355]">Free and open to everyone. All levels welcome — bring your mat and enjoy a morning of movement together.</p>
+              </div>
+
+              <div className="grid sm:grid-cols-3 gap-4">
+                {[
+                  ['Date', 'Saturday, 8 August 2026'],
+                  ['Time', '10:00 – 11:00 AM'],
+                  ['Location', 'Volkspark Friedrichshain, 10249 Berlin'],
+                ].map(([label, value]) => (
+                  <div key={label} className="bg-[#FDFAF6] border border-[#EAE0CF] rounded-xl px-5 py-4">
+                    <p className="text-[0.65rem] tracking-[0.15em] uppercase text-[#526B55] mb-1">{label}</p>
+                    <p className="text-[#5C4A32] font-medium text-[0.9rem]">{value}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-3 flex-wrap">
+                <span className="text-[0.75rem] font-medium text-[#526B55] bg-[#E8F0E9] border border-[#A8C5AB] px-4 py-2 rounded-full">Free entry</span>
+                <span className="text-[0.75rem] text-[#8B7355]">·</span>
+                <span className="text-[0.75rem] text-[#8B7355]">Bring your mat</span>
+              </div>
+
+              <a
+                href="https://www.eventbrite.de/e/free-community-yoga-tickets-1996482403613"
+                target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#7A9E7E] text-[#FDFAF6] text-[0.78rem] font-medium tracking-[0.08em] uppercase hover:bg-[#526B55] transition-all"
+              >
+                Register on Eventbrite
+              </a>
+            </div>
           </div>
         </div>
       </section>
