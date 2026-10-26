@@ -20,7 +20,7 @@ export interface RecurringSlot {
 export const CLASS_TEMPLATES: ClassTemplate[] = [
   { id: 'h-online',   type: 'hatha',     name: 'Hatha Yoga',  mode: 'Online',    duration: '45 min', price: '€15 / trial €8',  desc: 'Traditional Hatha — postures and conscious breathing, taught slowly. Join via Google Meet.', waMsg: 'Hi! I would like to book a Hatha Yoga class (online).' },
   { id: 'h-studio',   type: 'hatha',     name: 'Hatha Yoga',  mode: 'In Studio', duration: '45 min', price: '€18 / trial €10', desc: 'Traditional Hatha in the studio in Barnimblick 21, Ahrensfelde.', waMsg: 'Hi! I would like to book an in-studio Hatha Yoga class.' },
-  { id: 'pranayama',  type: 'pranayama', name: 'Pranayama',   mode: 'Online',    duration: '45 min', price: '€15 / trial €8',  desc: 'Foundational breathing practices from the Hatha tradition — exploring their purpose, effects, and place on the yogic path. Join via Google Meet.', waMsg: 'Hi! I would like to book a Pranayama class (online).' },
+  { id: 'pranayama',  type: 'pranayama', name: 'Pranayama',   mode: 'Online',    duration: '45 min', price: '€12',  desc: 'Foundational breathing practices from the Hatha tradition — exploring their purpose, effects, and place on the yogic path. Join via Google Meet.', waMsg: 'Hi! I would like to book a Pranayama class (online).' },
 ]
 
 export const RECURRING_SLOTS: RecurringSlot[] = [
