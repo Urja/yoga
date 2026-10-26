@@ -34,9 +34,7 @@ export const RECURRING_SLOTS: RecurringSlot[] = [
   { dayOfWeek: 1, time: '11:30', templateId: 'h-online' },
   { dayOfWeek: 2, time: '11:30', templateId: 'h-online' },
   { dayOfWeek: 3, time: '11:30', templateId: 'h-online' },
-  { dayOfWeek: 4, time: '11:30', templateId: 'h-pelvic-online' },
-  { dayOfWeek: 5, time: '11:30', templateId: 'h-online' },
-  { dayOfWeek: 6, time: '11:30', templateId: 'h-online' },
+  { dayOfWeek: 4, time: '11:30', templateId: 'h-online' },
 
   // Hatha Yoga in studio — Mon, Wed, Fri, Sat, Sun 10:30–11:15
   { dayOfWeek: 0, time: '10:30', templateId: 'h-studio' },
