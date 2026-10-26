@@ -35,12 +35,12 @@ export default function ContactPage() {
               Ready to start your practice or have questions? Reach out via WhatsApp for the quickest response.
             </p>
             <div className="space-y-6">
-              {[
+              {([
                 { icon: '📍', label: 'Location', value: 'Barnimblick 21, 16356 Ahrensfelde' },
                 { icon: '📧', label: 'Email', value: 'urja.ramanandi@gmail.com', href: 'mailto:urja.ramanandi@gmail.com' },
                 { icon: '📲', label: 'WhatsApp', value: 'Available for bookings & enquiries', href: 'https://wa.me/+4917668954497' },
                 { icon: '📸', label: 'Instagram', value: '@urja.ramanandi', href: 'https://instagram.com/urja.ramanandi' },
-              ].map(d => (
+              ] as { icon: string; label: string; value: string; href?: string; sub?: string }[]).map(d => (
                 <div key={d.label} className="flex gap-4 items-start">
                   <div className="w-10 h-10 rounded-full bg-[#E8F0E9] flex items-center justify-center shrink-0 text-base">{d.icon}</div>
                   <div>
