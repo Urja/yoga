@@ -205,6 +205,15 @@ export default function SchedulePage() {
                 </div>
               ))}
             </div>
+            <div className="bg-[#5C4A32] rounded-lg px-4 py-3 mb-3 text-[0.78rem] text-[#F7F2EA] leading-relaxed">
+              {modal.tpl.type === 'yin' ? (
+                <>💡 <span className="font-medium">Reduced rate available</span> — book regularly and pay €16 per session instead of €20. Ask via WhatsApp.</>
+              ) : modal.tpl.mode === 'Online' ? (
+                <>💡 <span className="font-medium">Passes available</span> — Weekly 4 classes €48/mo · Unlimited €150/mo. Ask via WhatsApp for details.</>
+              ) : (
+                <>💡 <span className="font-medium">Passes available</span> — Weekly 4 classes €60/mo · Unlimited €200/mo. Ask via WhatsApp for details.</>
+              )}
+            </div>
             <div className="space-y-3">
               <a
                 href={`https://wa.me/+4917668954497?text=${encodeURIComponent(`${modal.tpl.waMsg} I'd like to book ${modal.date} at ${modal.time} (${modal.tpl.mode}).`)}`}
