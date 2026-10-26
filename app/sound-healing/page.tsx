@@ -31,8 +31,8 @@ export default function SoundHealingPage() {
           <div className="bg-[#E8F0E9] border border-[#A8C5AB] rounded-xl p-6">
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div>
-                <p className="font-medium text-[#5C4A32] mb-1">Deep Relaxation · 45 min</p>
-                <p className="text-[0.82rem]">Trial €12 · Drop-in €20 · Regular €16 / session</p>
+                <p className="font-medium text-[#5C4A32] mb-1">Deep Relaxation · 45 min · By appointment</p>
+                <p className="text-[0.82rem]">€20 / session — write to me to schedule</p>
               </div>
               <a href="https://wa.me/+4917668954497?text=Hi!%20I%20would%20like%20to%20book%20a%20Deep%20Relaxation%20session." target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded-full bg-[#7A9E7E] text-[#FDFAF6] text-[0.75rem] font-medium tracking-wide uppercase hover:bg-[#526B55] transition-all whitespace-nowrap">
                 Book via WhatsApp
