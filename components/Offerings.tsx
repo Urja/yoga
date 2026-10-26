@@ -26,7 +26,7 @@ export default function Offerings() {
                 {([
                   ['Trial', 'First class', null, '€10'],
                   ['Drop-In', 'Per class', null, '€15'],
-                  ['Weekly', null, 'Popular', '€50 / mo'],
+                  ['4 Classes', null, 'Popular', '€50'],
                 ] as const).map(([label, detail, badge, price]) => (
                   <div key={label} className={`flex items-center justify-between px-3 py-2 rounded-lg text-[0.72rem] ${badge ? 'bg-[#E8F0E9] border border-[#7A9E7E]' : 'bg-[#FDFAF6] border border-[#EAE0CF]'}`}>
                     <span className="flex gap-2 items-center text-[#8B7355] font-medium uppercase tracking-wide">

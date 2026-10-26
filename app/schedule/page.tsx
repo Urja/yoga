@@ -152,7 +152,7 @@ export default function SchedulePage() {
                     </div>
                   ))
                 ) : (
-                  [['Trial','€10'],['Drop-in','€15'],['4-Class Pass','€50 / month']].map(([label, price]) => (
+                  [['Trial','€10'],['Drop-in','€15'],['4 Classes','€50']].map(([label, price]) => (
                     <div key={label} className="flex justify-between text-[0.82rem]">
                       <span className="text-[#8B7355]">{label}</span>
                       <span className="font-medium text-[#5C4A32]">{price}</span>
@@ -163,7 +163,7 @@ export default function SchedulePage() {
             </div>
             {modal.tpl.id !== 'pranayama' && (
             <div className="bg-[#5C4A32] rounded-lg px-4 py-3 mb-3 text-[0.78rem] text-[#F7F2EA] leading-relaxed">
-              💡 <span className="font-medium">Pass available</span> — 4 classes €50/mo. Ask via WhatsApp.
+              💡 <span className="font-medium">Pass available</span> — 4 classes €50. Ask via WhatsApp.
             </div>
             )}
             <div className="space-y-3">
