@@ -26,7 +26,7 @@ export default function AboutPage() {
           <p>What began as a personal practice gradually became a way of living.</p>
 
           <p>
-            The yoga that helped me was not the fast-paced, fitness-focused style often found in modern studios. It was a quieter tradition — one that values awareness over achievement, consistency over intensity, and long-term wellbeing over short-term results.
+            The practice that changed things for me was quieter and more traditional — rooted in awareness rather than achievement, consistency rather than intensity, and long-term wellbeing rather than short-term results.
           </p>
 
           <p>That experience shaped everything I teach today.</p>
