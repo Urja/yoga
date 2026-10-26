@@ -48,13 +48,13 @@ export default function SoundHealingPage() {
             Private Sound Bath sessions — with singing bowls, gong, and chimes — are available on request. If you are interested in booking one for yourself or a small group, reach out directly.
           </p>
 
-          <div className="bg-[#F7F2EA] border border-[#EAE0CF] rounded-xl p-6">
+          <div className="bg-[#E8F0E9] border border-[#A8C5AB] rounded-xl p-6">
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div>
                 <p className="font-medium text-[#5C4A32] mb-1">Private Sound Bath</p>
                 <p className="text-[0.82rem]">Available on request · pricing on enquiry</p>
               </div>
-              <a href="https://wa.me/+4917668954497?text=Hi!%20I%20would%20like%20to%20enquire%20about%20a%20private%20Sound%20Bath%20session." target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded-full border border-[#7A9E7E] text-[#526B55] text-[0.75rem] font-medium tracking-wide uppercase hover:bg-[#E8F0E9] transition-all whitespace-nowrap">
+              <a href="https://wa.me/+4917668954497?text=Hi!%20I%20would%20like%20to%20enquire%20about%20a%20private%20Sound%20Bath%20session." target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded-full bg-[#7A9E7E] text-[#FDFAF6] text-[0.75rem] font-medium tracking-wide uppercase hover:bg-[#526B55] transition-all whitespace-nowrap">
                 Enquire via WhatsApp
               </a>
             </div>
