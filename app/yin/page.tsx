@@ -44,7 +44,7 @@ export default function YinPage() {
               </a>
             </div>
           </div>
-          <p className="text-center"><Link href="/blog/what-yin-yoga-does" className="text-[#526B55] hover:underline text-[0.9rem]">Read: What yin yoga does that other practices cannot →</Link></p>
+          {/* <p className="text-center"><Link href="/blog/what-yin-yoga-does" className="text-[#526B55] hover:underline text-[0.9rem]">Read: What yin yoga does that other practices cannot →</Link></p> */}
         </div>
       </section>
     </main>

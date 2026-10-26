@@ -110,11 +110,11 @@ export default function HathaPage() {
             </div>
           </div>
 
-          <p className="text-center pt-4">
+          {/* <p className="text-center pt-4">
             <Link href="/blog/why-i-teach-slowly" className="text-[#526B55] hover:underline text-[0.9rem]">
               Read: Why I teach slowly — and why it matters more than you might think →
             </Link>
-          </p>
+          </p> */}
         </div>
       </section>
     </main>
