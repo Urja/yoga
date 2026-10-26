@@ -1,4 +1,11 @@
-import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Sound Healing Berlin',
+  description: 'Himalayan singing bowl sound healing in Berlin — Deep Relaxation sessions and private Sound Baths. Book a session at the studio in Ahrensfelde.',
+  alternates: { canonical: 'https://www.urja.yoga/sound-healing' },
+  openGraph: { title: 'Sound Healing Berlin · Urja Yoga', description: 'Himalayan singing bowl sessions and Deep Relaxation in Berlin.', url: 'https://www.urja.yoga/sound-healing' },
+}
 
 export default function SoundHealingPage() {
   return (

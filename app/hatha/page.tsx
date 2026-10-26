@@ -1,4 +1,12 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Hatha Yoga Berlin',
+  description: 'Traditional Hatha Yoga classes in Berlin — online and in studio. Slow, mindful practice for all levels. Trial class €10. Small groups.',
+  alternates: { canonical: 'https://www.urja.yoga/hatha' },
+  openGraph: { title: 'Hatha Yoga Berlin · Urja Yoga', description: 'Traditional Hatha Yoga — online and in studio in Berlin. Small groups, full attention.', url: 'https://www.urja.yoga/hatha' },
+}
 
 export default function HathaPage() {
   return (

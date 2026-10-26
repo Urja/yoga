@@ -1,3 +1,12 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Events & Workshops',
+  description: 'Upcoming yoga workshops and events in Berlin — Traditional Hatha Yoga practice and philosophy workshops with Urja.',
+  alternates: { canonical: 'https://www.urja.yoga/events' },
+  openGraph: { title: 'Yoga Events Berlin · Urja Yoga', description: 'Upcoming yoga workshops and community events in Berlin.', url: 'https://www.urja.yoga/events' },
+}
+
 export default function EventsPage() {
   return (
     <main>

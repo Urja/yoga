@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+// Metadata exported from a separate file (schedule/metadata.ts) — client pages can't export metadata directly
 import { CLASS_TEMPLATES, RECURRING_SLOTS, type ClassTemplate } from '@/lib/schedule'
 
 const DAY_NAMES = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']

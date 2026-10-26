@@ -1,10 +1,39 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Offerings from '@/components/Offerings'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Urja Yoga & Sound · Traditional Yoga in Berlin',
+  description: 'Traditional Hatha Yoga, Pranayama and Sound Healing in Berlin — online and in studio. Small groups, personal attention. Trial class from €10.',
+  alternates: { canonical: 'https://www.urja.yoga' },
+  openGraph: { title: 'Urja Yoga & Sound · Berlin', description: 'Traditional Hatha Yoga, Pranayama and Sound Healing in Berlin — online and in studio.', url: 'https://www.urja.yoga' },
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Urja Yoga & Sound',
+  url: 'https://www.urja.yoga',
+  email: 'urjaramanandi@gmail.com',
+  telephone: '+4917668954497',
+  address: { '@type': 'PostalAddress', addressLocality: 'Ahrensfelde', addressRegion: 'Berlin', addressCountry: 'DE' },
+  geo: { '@type': 'GeoCoordinates', latitude: 52.5717, longitude: 13.5698 },
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Wednesday', 'Friday'], opens: '11:30', closes: '12:15' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Wednesday'], opens: '19:00', closes: '19:45' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Friday'], opens: '19:00', closes: '19:45' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday'], opens: '10:30', closes: '11:15' },
+  ],
+  sameAs: ['https://www.instagram.com/urja.yoga'],
+  priceRange: '€10–€50',
+  description: 'Traditional Hatha Yoga, Pranayama and Sound Healing in Berlin — online and in studio. Small groups, full attention.',
+}
 
 export default function HomePage() {
   return (
     <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* ── HERO ── */}
       <section className="min-h-screen grid md:grid-cols-2 items-center relative overflow-hidden pt-20">

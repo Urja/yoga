@@ -1,3 +1,11 @@
+import type { Metadata } from 'next'
+export const metadata: Metadata = {
+  title: 'About Urja',
+  description: 'Urja teaches traditional Hatha Yoga in Berlin — a quiet, thoughtful practice rooted in awareness rather than achievement. Learn her story and approach.',
+  alternates: { canonical: 'https://www.urja.yoga/about' },
+  openGraph: { title: 'About Urja · Yoga & Sound Berlin', description: 'Traditional yoga teacher in Berlin. Small groups, full attention.', url: 'https://www.urja.yoga/about' },
+}
+
 export default function AboutPage() {
   return (
     <main>

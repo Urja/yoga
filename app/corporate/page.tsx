@@ -1,3 +1,12 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Corporate Wellness Berlin',
+  description: 'Corporate wellness sessions for teams in Berlin — Pranayama, guided meditation and Sound Bath brought to your workplace or event. Enquire for your team.',
+  alternates: { canonical: 'https://www.urja.yoga/corporate' },
+  openGraph: { title: 'Corporate Yoga & Wellness Berlin · Urja', description: 'One-off wellbeing sessions for teams in Berlin — Pranayama, meditation and Sound Bath at your workplace.', url: 'https://www.urja.yoga/corporate' },
+}
+
 export default function CorporatePage() {
   return (
     <main>
