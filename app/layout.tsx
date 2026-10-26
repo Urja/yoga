@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     default: 'Urja Yoga & Sound · Berlin',
     template: '%s · Urja Yoga Berlin',
   },
-  description: 'Traditional Hatha Yoga, Pranayama and Sound Healing in Berlin — online and in studio. Small groups, full attention. Trial class from €10.',
+  description: 'Yoga classes in Ahrensfelde, Berlin — Hatha, Pranayama and Sound Healing online and in studio. Small groups, full attention. Trial class from €10.',
   metadataBase: new URL('https://www.urja.yoga'),
   openGraph: {
     siteName: 'Urja Yoga & Sound',
