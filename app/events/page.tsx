@@ -16,7 +16,7 @@ export default function EventsPage() {
           <p className="text-[0.7rem] font-medium tracking-[0.2em] uppercase text-[#526B55] mb-8">Upcoming</p>
           <div className="bg-[#F7F2EA] border border-[#EAE0CF] rounded-2xl overflow-hidden">
             <div className="aspect-[16/6] relative overflow-hidden bg-[#3D4A2E]">
-              <img src="/images/workshop20sep_eventbrite_2160x1080.jpg" alt="Hatha Yoga Practice & Philosophy Workshop" className="w-full h-full object-cover object-center opacity-90" />
+              <img src="/images/workshop20sep.jpg" alt="Hatha Yoga Practice & Philosophy Workshop" className="w-full h-full object-cover object-center opacity-90" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#3D4A2E]/70 to-transparent" />
               <span className="absolute top-4 left-4 text-[0.6rem] font-medium tracking-[0.15em] uppercase bg-white/80 text-[#526B55] px-3 py-1 rounded-full">Workshop</span>
             </div>
