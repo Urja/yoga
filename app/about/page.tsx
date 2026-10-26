@@ -1,12 +1,8 @@
 export default function AboutPage() {
   return (
     <main>
-      <section className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden">
-        <div className="absolute inset-0">
-          <img src="/images/AboutmeTop.jpg" alt="Urja" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#F7F2EA] via-[#F7F2EA]/40 to-transparent" />
-        </div>
-        <div className="relative z-10 max-w-[780px] mx-auto px-8 pt-40">
+      <section className="pt-40 pb-16 bg-[#FDFAF6]">
+        <div className="max-w-[780px] mx-auto px-8">
           <p className="text-[0.7rem] font-medium tracking-[0.2em] uppercase text-[#526B55] mb-4">My Story</p>
           <h1 className="font-serif text-[clamp(2.5rem,6vw,4rem)] font-light text-[#5C4A32] leading-tight">
             A quiet, traditional path<br /><em>back to health.</em>
