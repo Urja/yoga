@@ -95,6 +95,25 @@ export default function Offerings() {
             </div>
           </div>
         </div>
+
+        {/* Corporate */}
+        <div className="mt-6 bg-[#F7F2EA] border border-[#EAE0CF] rounded-xl overflow-hidden hover:-translate-y-1 hover:shadow-lg hover:border-[#A8C5AB] transition-all">
+          <div className="p-6 md:flex md:items-center md:justify-between gap-8">
+            <div className="mb-5 md:mb-0">
+              <p className="text-[0.68rem] tracking-[0.12em] uppercase text-[#7A9E7E] mb-2">🏢 At your workplace · Groups</p>
+              <h3 className="font-serif text-[1.5rem] font-normal text-[#5C4A32] mb-2">Corporate Wellness</h3>
+              <p className="text-[0.85rem] text-[#8B7355] leading-relaxed max-w-xl">Occasional group sessions — Pranayama & Meditation or Sound Bath — held at your office. No experience needed. Pricing on enquiry.</p>
+            </div>
+            <div className="flex gap-3 flex-wrap shrink-0">
+              <a href="/corporate" className="px-5 py-2.5 rounded-full border border-[#DDD0BB] text-[#5C4A32] text-[0.75rem] font-medium tracking-wide uppercase hover:border-[#7A9E7E] hover:text-[#526B55] transition-all whitespace-nowrap">
+                Learn More
+              </a>
+              <a href="https://wa.me/+4917668954497?text=Hi!%20I%20would%20like%20to%20enquire%20about%20a%20corporate%20wellness%20session." target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded-full bg-[#7A9E7E] text-[#FDFAF6] text-[0.75rem] font-medium tracking-wide uppercase hover:bg-[#526B55] transition-all whitespace-nowrap">
+                📲 Enquire
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

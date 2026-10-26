@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Urja Yoga & Sound · Traditional Yoga in Berlin',
-  description: 'Traditional Hatha Yoga, Pranayama and Sound Healing in Berlin — online and in studio. Small groups, personal attention. Trial class from €10.',
+  description: 'Traditional Hatha Yoga, Pranayama and Sound Healing in Ahrensfelde, Berlin — online and in studio. Small groups, personal attention. Trial class from €10.',
   alternates: { canonical: 'https://www.urja.yoga' },
   openGraph: { title: 'Urja Yoga & Sound · Berlin', description: 'Traditional Hatha Yoga, Pranayama and Sound Healing in Berlin — online and in studio.', url: 'https://www.urja.yoga' },
 }
@@ -27,7 +27,8 @@ const jsonLd = {
   ],
   sameAs: ['https://www.instagram.com/urja.yoga'],
   priceRange: '€10–€50',
-  description: 'Traditional Hatha Yoga, Pranayama and Sound Healing in Berlin — online and in studio. Small groups, full attention.',
+  description: 'Traditional Hatha Yoga, Pranayama and Sound Healing in Ahrensfelde, Berlin — online and in studio. Small groups, full attention.',
+  areaServed: ['Ahrensfelde', 'Berlin', 'Marzahn', 'Hellersdorf', 'Hönow', 'Berliner Umland'],
 }
 
 export default function HomePage() {
@@ -53,7 +54,8 @@ export default function HomePage() {
             Through hatha, yin, pranayama & sound, I guide you back to calm, stillness, and yourself.
           </p>
           <p className="text-[0.82rem] text-[#8B7355] italic opacity-70 mb-10">
-            Traditional practice. Small groups. Full attention.
+            Traditional practice. Small groups. Full attention.<br />
+            In studio in Ahrensfelde, Berlin — and online.
           </p>
           <div className="flex gap-4 flex-wrap">
             <Link href="/schedule" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#7A9E7E] text-[#FDFAF6] text-[0.78rem] font-medium tracking-[0.08em] uppercase hover:bg-[#526B55] hover:-translate-y-0.5 transition-all">

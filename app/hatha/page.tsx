@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Hatha Yoga Berlin',
-  description: 'Traditional Hatha Yoga classes in Berlin — online and in studio. Slow, mindful practice for all levels. Trial class €10. Small groups.',
+  description: 'Traditional Hatha Yoga classes in Ahrensfelde, Berlin — online and in studio. Slow, mindful practice for all levels. Trial class €10. Small groups.',
   alternates: { canonical: 'https://www.urja.yoga/hatha' },
   openGraph: { title: 'Hatha Yoga Berlin · Urja Yoga', description: 'Traditional Hatha Yoga — online and in studio in Berlin. Small groups, full attention.', url: 'https://www.urja.yoga/hatha' },
 }
@@ -54,7 +54,7 @@ export default function HathaPage() {
               '45 minutes of asana, pranayama, and dhyan',
               'Pranayama woven naturally into every class',
               'Small groups',
-              'Available online via Google Meet, or in person in Ahrensfelde',
+              'In studio in Barnimblick 21, Ahrensfelde (Berlin) — and online via Google Meet',
             ].map(item => (
               <li key={item} className="flex gap-3">
                 <span className="text-[#7A9E7E] shrink-0 mt-0.5">—</span>

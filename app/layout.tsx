@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.urja.yoga',
   },
   verification: {
-    google: '4HCDRSt44k6zTfyDQ5QEF_jcO8j6GNvCzTTz4TBb96A',
+    google: ['4HCDRSt44k6zTfyDQ5QEF_jcO8j6GNvCzTTz4TBb96A', 'Tmhzb6qtNHdTJUVN9SK1yFbVk0EHV97Ydth4G6oNxtM'],
   },
 }
 
