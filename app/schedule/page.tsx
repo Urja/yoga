@@ -198,12 +198,42 @@ export default function SchedulePage() {
             <h2 className="font-serif text-[2rem] font-light text-[#5C4A32] mb-1">{modal.tpl.name}</h2>
             <p className="text-[0.85rem] text-[#8B7355] mb-5">{modal.tpl.desc}</p>
             <div className="bg-[#F7F2EA] rounded-lg p-4 mb-5 space-y-2">
-              {[['Date', modal.date],['Time', `${modal.time} (Berlin time)`],['Duration', modal.tpl.duration],['Format', modal.tpl.mode],['Price', modal.tpl.price]].map(([k,v]) => (
+              {[['Date', modal.date],['Time', `${modal.time} (Berlin time)`],['Duration', modal.tpl.duration],['Format', modal.tpl.mode]].map(([k,v]) => (
                 <div key={k} className="flex justify-between text-[0.85rem]">
                   <span className="text-[#8B7355]">{k}</span>
                   <span className="font-medium text-[#5C4A32]">{v}</span>
                 </div>
               ))}
+              <div className="border-t border-[#EAE0CF] pt-2 mt-2 space-y-1">
+                {modal.tpl.mode === 'Online' ? (
+                  <>
+                    {[['Trial','€8'],['Drop-in','€15'],['4-Class Pass','€48 / month'],['Unlimited Membership','€150 / month']].map(([label, price]) => (
+                      <div key={label} className="flex justify-between text-[0.82rem]">
+                        <span className="text-[#8B7355]">{label}</span>
+                        <span className="font-medium text-[#5C4A32]">{price}</span>
+                      </div>
+                    ))}
+                  </>
+                ) : modal.tpl.type === 'yin' ? (
+                  <>
+                    {[['Trial','€12'],['Drop-in','€20'],['Regular rate','€16 / session']].map(([label, price]) => (
+                      <div key={label} className="flex justify-between text-[0.82rem]">
+                        <span className="text-[#8B7355]">{label}</span>
+                        <span className="font-medium text-[#5C4A32]">{price}</span>
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {[['Trial','€10'],['Drop-in','€18'],['4-Class Pass','€60 / month'],['Unlimited Membership','€200 / month']].map(([label, price]) => (
+                      <div key={label} className="flex justify-between text-[0.82rem]">
+                        <span className="text-[#8B7355]">{label}</span>
+                        <span className="font-medium text-[#5C4A32]">{price}</span>
+                      </div>
+                    ))}
+                  </>
+                )}
+              </div>
             </div>
             <div className="bg-[#5C4A32] rounded-lg px-4 py-3 mb-3 text-[0.78rem] text-[#F7F2EA] leading-relaxed">
               {modal.tpl.type === 'yin' ? (
